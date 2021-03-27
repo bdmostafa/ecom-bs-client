@@ -7,7 +7,7 @@ const OrdersTable = () => {
         {
           title: 'Customer',
           dataIndex: 'customer',
-          key: 'name',
+          key: 'customer',
           render: text => <a>{text}</a>,
         },
         {
@@ -55,7 +55,7 @@ const OrdersTable = () => {
       const data = [
         {
           key: '1',
-          name: 'John Brown',
+          customer: 'John Brown',
           age: 32,
           address: 'New York No. 1 Lake Park',
           tags: ['nice', 'developer'],

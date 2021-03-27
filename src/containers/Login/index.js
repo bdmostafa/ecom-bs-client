@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { createUser } from '../../Redux/User/UserActions';
 
 const Register = () => {
+    const dispatch = useDispatch();
+
     const onFinish = (values) => {
-        console.log('Success:', values);
+        const userData = {
+            name: values.name,
+            email: values.email,
+            password: values.password,
+            confirmPassword: values.confirmPassword,
+        }
+        dispatch(createUser(userData))
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -61,7 +71,7 @@ const Register = () => {
 
                 <Form.Item
                     label="Confirm Password"
-                    name="cPassword"
+                    name="confirmPassword"
                     rules={[
                         {
                             required: true,
