@@ -21,6 +21,7 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
       };
     case Types.ORDER_FAILURE:
       return {
+        ...state,
         loading: false,
         orders: [],
         err: action.payload,
@@ -28,6 +29,7 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
 
     case Types.GET_ALL_ORDERS:
       return {
+        ...state,
         loading: false,
         orders: action.payload,
         err: ""
@@ -35,6 +37,7 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
 
     case Types.GET_ORDER:
       return {
+        ...state,
         loading: false,
         order: action.payload,
         err: ""
@@ -42,6 +45,7 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
 
     case Types.GET_PENDING_ORDERS:
       return {
+        ...state,
         loading: false,
         pendingOrders: action.payload,
         err: ""
@@ -49,6 +53,7 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
 
     case Types.GET_ORDERS_BY_DATE:
       return {
+        ...state,
         loading: false,
         OrdersByDate: action.payload,
         err: ""
@@ -56,6 +61,7 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
 
     case Types.CREATE_ORDER:
       return {
+        ...state,
         loading: false,
         order: action.payload,
         err: ""

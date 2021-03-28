@@ -21,6 +21,7 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
       };
     case Types.PRODUCT_FAILURE:
       return {
+        ...state,
         loading: false,
         products: [],
         err: action.payload,
@@ -28,6 +29,7 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
 
     case Types.GET_ALL_PRODUCTS:
       return {
+        ...state,
         loading: false,
         products: action.payload,
         err: ""
@@ -35,15 +37,16 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
 
     case Types.GET_PRODUCT:
       return {
+        ...state,
         loading: false,
-        user: action.payload,
+        product: action.payload,
         err: ""
       };
 
     case Types.CREATE_PRODUCT:
       return {
         loading: false,
-        user: action.payload,
+        product: action.payload,
         err: ""
       };
 

@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     switch (action.type) {
       case Types.ADD_TO_CART: {
         return {
+          ...state,
           cart: [...state.cart, action.payload],
         };
       }
@@ -15,6 +16,7 @@ const INITIAL_STATE = {
         const idx = state.cart.findIndex((item) => item._id === action.payload);
         state.cart[idx].quantity = state.cart[idx].quantity + 1;
         return {
+          ...state,
           cart: [...state.cart],
         };
       }
@@ -24,6 +26,7 @@ const INITIAL_STATE = {
         if (state.cart[idx].quantity > 1) {
           state.cart[idx].quantity = state.cart[idx].quantity - 1;
           return {
+            ...state,
             cart: [...state.cart],
           };
         }
@@ -35,6 +38,7 @@ const INITIAL_STATE = {
           (item) => item._id !== action.payload
         );
         return {
+          ...state,
           cart: updatedCart,
         };
       }

@@ -22,7 +22,7 @@ export const addToCartAction = (item) => {
 
   export const removeFromCartAction = (itemId) => {
     return {
-      type: REMOVE_FROM_CART,
+      type: Types.REMOVE_FROM_CART,
       payload: itemId,
     };
   };

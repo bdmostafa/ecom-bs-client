@@ -28,6 +28,7 @@ const UserReducer = (state = INITIAL_STATE, action) => {
 
     case Types.GET_ALL_USERS:
       return {
+        ...state,
         loading: false,
         users: action.payload,
         err: ""
@@ -35,8 +36,9 @@ const UserReducer = (state = INITIAL_STATE, action) => {
 
     case Types.GET_USER:
       return {
+        ...state,
         loading: false,
-        user: action.payload,
+        loggedInUser: action.payload,
         err: ""
       };
 

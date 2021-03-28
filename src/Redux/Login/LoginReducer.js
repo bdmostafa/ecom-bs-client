@@ -1,7 +1,7 @@
 import * as Types from './LoginTypes';
 
 const INITIAL_STATE = {
-    user: {},
+    loggedInUser: {},
     loading: false,
     errMessage: "",
   };
@@ -15,19 +15,20 @@ const INITIAL_STATE = {
         };
       case Types.LOGIN_SUCCESS:
         return {
-          user: action.payload,
+          ...state,
+          loggedInUser: action.payload,
           loading: false,
           errMessages: "",
         };
       case Types.LOGIN_FAILURE:
         return {
-          user: {},
+          loggedInUser: {},
           loading: false,
           errMessage: action.payload,
         };
       case Types.LOGOUT:
         return {
-          user: {},
+          loggedInUser: {},
           loading: false,
           errMessage: "",
         };
