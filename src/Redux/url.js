@@ -7,22 +7,22 @@ const client = () => {
 	return {
         // User Urls
 		getUsers: () => {
-			return axios.get(`${url}/users`);
+			return axios.get(`${url}/users`, { withCredentials: true });
 		},
 		createUser: (userInfo) => {
-			return axios.post(`${url}/users/create`, userInfo, {withCredentials: true, credentials: 'include'});
+			return axios.post(`${url}/users/create`, userInfo);
 		},
         getUser: () => {
-			return axios.get(`${url}/users/me`);
+			return axios.get(`${url}/users/me`, { withCredentials: true });
 		},
         updateUser: (userInfo) => {
-			return axios.patch(`${url}/users/update/me`, userInfo);
+			return axios.patch(`${url}/users/update/me`, userInfo, { withCredentials: true });
 		},
         deleteUser: (id) => {
-			return axios.delete(`${url}/users/delete/me`, id);
+			return axios.delete(`${url}/users/delete/me`, id, { withCredentials: true });
 		},
         deleteUsers: (id) => {
-			return axios.delete(`${url}/users/delete`, id);
+			return axios.delete(`${url}/users/delete`, id, { withCredentials: true });
 		},
 
         // Login Urls
@@ -30,7 +30,7 @@ const client = () => {
 			return axios.post(`${url}/users/login`, userInfo, {withCredentials: true, credentials: 'include'});
 		},
         userLogout: () => {
-			return axios.post(`${url}/users/logout`);
+			return axios.post(`${url}/users/logout`, { withCredentials: true });
 		},
 
         // Product Urls
