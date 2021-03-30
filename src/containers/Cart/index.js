@@ -2,208 +2,186 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
-import { message } from "antd";
+import { Col, message, Row } from "antd";
 import CartItem from "../../components/Cart/CartItem";
 import NotFound from "../../components/NoFound";
 import { createOrder } from "../../Redux/Order/OrderActions";
-import { fetchUser } from "../../Redux/User/UserActions";
+import HeaderInner from "../Header/HeaderInner";
+import styled from 'styled-components';
+
 
 const Cart = () => {
     const dispatch = useDispatch();
-	const history = useHistory();
+    const history = useHistory();
     const cartItems = useSelector((state) => state.cart.cart);
-	const user = useSelector((state) => state.users.user);
+    const user = useSelector((state) => state.users.user);
 
-    // dispatch(fetchUser());
+    const subTotal = cartItems.reduce((a, b) => a + b.price * b.quantity, 0);
 
-	const subTotal = cartItems.reduce((a, b) => a + b.price * b.quantity, 0);
+    const initialValues = {
+        name: "",
+        email: "",
+        street: "",
+        city: "",
+        country: "",
+        zip: "",
+        card_no: "",
+        expire_date: "",
+        cvc: "",
+    };
 
-	const initialValues = {
-		name: "",
-		email: "",
-		street: "",
-		city: "",
-		country: "",
-		zip: "",
-		card_no: "",
-		expire_date: "",
-		cvc: "",
-	};
+    const handleFormSubmit = (values) => {
+        let orderItems = cartItems.map((item) => ({
+            product: item._id,
+            quantity: item.quantity,
+        }));
 
-	const handleFormSubmit = (values) => {
-		let orderItems = cartItems.map((item) => ({
-			product: item._id,
-			quantity: item.quantity,
-		}));
-
-		if (!user?.role === 'user') {
-			message.error("Please Login First");
-		} else if (values.street && values.email) {
-			dispatch(createOrder(orderItems))
-		} else {
-			message.error("Please Provide Shipping Information");
-		}
-	};
+        if (!user?.role === 'user') {
+            message.error("Please Login First");
+        } else if (values.name && values.street && values.email) {
+            dispatch(createOrder(orderItems))
+        } else {
+            message.error("Please Provide Shipping Information");
+        }
+    };
     return (
-        <div>
-			{cartItems.length ? (
-				<div className="px-7 py-5 lg:py-10 flex flex-col lg:flex-row">
-					<div className="lg:w-3/4 lg:mr-8">
-						<div className="font-semibold text-lg">Shopping Cart</div>
+        <>
+            <HeaderInner />
+            {cartItems.length ? (
+                <Row gutter={[32, 32]} style={{ padding: '50px', display: 'flex', justifyContent: 'center' }}>
+                    <Col xs={24} sm={12} md={12} lg={16} xl={18} >
+                        <h2>Shopping Cart</h2>
 
-						{cartItems.map((cartItem) => (
-							<CartItem key={cartItem._id} data={cartItem} />
-						))}
+                        {cartItems.map((cartItem) => (
+                            <CartItem key={cartItem._id} data={cartItem} />
+                        ))}
 
-						<div className="flex justify-between items-center mt-10">
-							<div className="flex items-center">
-								<span className="material-icons">west</span>
-								<Link to="/" className="text-blue-700 font-semibold ml-2">
-									Continue Shopping
-								</Link>
-							</div>
-							<div className="flex items-center">
-								<p className="text-sm text-gray-700 m-0">Subtotal:</p>
-								&nbsp;&nbsp;
-								<h4 className="font-semibold m-0">${parseInt(subTotal).toFixed(2)}</h4>
-							</div>
-						</div>
-					</div>
-					<div className="lg:w-1/4 mt-10 lg:mt-0">
-						<div className="payment-wrapper">
-							<div className="bg-gray-700 rounded-md px-5 py-5">
-								<div className="rounded shadow-xl">
-									<Formik
-										initialValues={initialValues}
-										onSubmit={handleFormSubmit}
-									>
-										<Form>
-											<p className="text-white font-xl font-semibold">
-												Shipping information
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                            <p>Subtotal: {" "}</p>
+                            <h3> {" "}${parseInt(subTotal).toFixed(2)}</h3>
+                        </div>
+                    </Col>
+                    <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+                        <PaymentWrapper>
+                            <div style={{ background: 'gray', padding: '5px' }}>
+                                <Formik
+                                    initialValues={initialValues}
+                                    onSubmit={handleFormSubmit}
+                                >
+                                    <Form>
+                                        <p>
+                                            Shipping information
 											</p>
-											<div>
-												<Field
-													className="w-full p-2 text-gray-700 bg-gray-200 rounded focus:outline-none"
-													name="name"
-													type="text"
-													required=""
-													placeholder="Your Name"
-												/>
-											</div>
-											<div className="mt-2">
-												<Field
-													className="w-full p-2 text-gray-700 bg-gray-200 rounded focus:outline-none"
-													name="email"
-													type="text"
-													required=""
-													placeholder="Your Email"
-													aria-label="Email"
-												/>
-											</div>
-											<div className="mt-2">
-												<Field
-													className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:outline-none"
-													name="street"
-													type="text"
-													required=""
-													placeholder="Street"
-													aria-label="Street"
-												/>
-											</div>
-											<div className="mt-2">
-												<Field
-													className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:outline-none"
-													name="city"
-													type="text"
-													required=""
-													placeholder="City"
-													aria-label="City"
-												/>
-											</div>
-											<div className="inline-block mt-2 w-1/2 pr-1">
-												<Field
-													className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:outline-none"
-													name="country"
-													type="text"
-													required=""
-													placeholder="Country"
-													aria-label="Country"
-												/>
-											</div>
-											<div className="inline-block mt-2 pl-1 w-1/2">
-												<Field
-													className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:outline-none"
-													name="zip"
-													type="text"
-													required=""
-													placeholder="Zip"
-													aria-label="Zip"
-												/>
-											</div>
-											<p className="mt-4 text-white font-semibold">
-												Payment information
+                                        <div>
+                                            <Field
+                                                name="name"
+                                                type="text"
+                                                required=""
+                                                placeholder={user ? user.name : "Your Name"}
+                                            />
+                                        </div>
+                                        <div style={{ marginTop: '5px' }}>
+                                            <Field
+                                                name="email"
+                                                type="text"
+                                                required=""
+                                                placeholder={user ? user.email : "Your Email"}
+                                                aria-label="Email"
+                                            />
+                                        </div>
+                                        <div style={{ marginTop: '5px' }}>
+                                            <Field
+                                                name="street"
+                                                type="text"
+                                                required=""
+                                                placeholder="Street"
+                                                aria-label="Street"
+                                            />
+                                        </div>
+                                        <div style={{ marginTop: '5px' }}>
+                                            <Field
+                                                name="city"
+                                                type="text"
+                                                required=""
+                                                placeholder="City"
+                                                aria-label="City"
+                                            />
+                                        </div>
+                                        <div>
+                                            <Field
+                                                name="country"
+                                                type="text"
+                                                required=""
+                                                placeholder="Country"
+                                                aria-label="Country"
+                                            />
+                                        </div>
+                                        <div>
+                                            <Field
+                                                name="zip"
+                                                type="text"
+                                                required=""
+                                                placeholder="Zip"
+                                                aria-label="Zip"
+                                            />
+                                        </div>
+                                        <p>
+                                            Payment information
 											</p>
-											<div className="">
-												<Field
-													className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:outline-none"
-													name="card_no"
-													type="text"
-													required=""
-													placeholder="Card Number"
-													aria-label="Cart Number"
-												/>
-											</div>
-											<div className="inline-block mt-2 w-1/2 pr-1">
-												<Field
-													className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:outline-none"
-													name="expire_date"
-													type="text"
-													required=""
-													placeholder="MM/YY"
-												/>
-											</div>
-											<div className="inline-block mt-2 pl-1 w-1/2">
-												<Field
-													className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:outline-none"
-													name="cvc"
-													type="text"
-													required=""
-													placeholder="CVC"
-												/>
-											</div>
-											<div className="flex justify-center mt-5">
-												<button
-													type="submit"
-													className="bg-yellow-200 text-black w-full py-3 rounded-md font-bold text-sm focus:outline-none"
-												>
-													Pay Now
+                                        <div>
+                                            <Field
+                                                name="card_no"
+                                                type="text"
+                                                required=""
+                                                placeholder="Card Number"
+                                                aria-label="Cart Number"
+                                            />
+                                        </div>
+                                        <div>
+                                            <Field
+                                                name="expire_date"
+                                                type="text"
+                                                required=""
+                                                placeholder="MM/YY"
+                                            />
+                                        </div>
+                                        <div>
+                                            <Field
+                                                name="cvc"
+                                                type="text"
+                                                required=""
+                                                placeholder="CVC"
+                                            />
+                                        </div>
+                                        <div style={{ marginTop: '10px' }}>
+                                            <button
+                                                type="submit"
+                                                style={{ padding: '5px' }}
+                                            >
+                                                Pay Now
 												</button>
-											</div>
-										</Form>
-									</Formik>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			) : (
-				<div className="p-12">
-					<NotFound
-						msg="Your Cart is Empty"
-						navText="Add Items to Cart"
-						icon="shopping_basket"
-					/>
-				</div>
-			)}
-
-			<style jsx>{`
-				.payment-wrapper {
-					position: sticky;
-					top: 80px;
-				}
-			`}</style>
-		</div>
+                                        </div>
+                                    </Form>
+                                </Formik>
+                            </div>
+                        </PaymentWrapper>
+                    </Col>
+                </Row>
+            ) : (
+                <NotFound
+                    msg="Your Cart is Empty"
+                    BtnText="Add Items to Cart"
+                />
+            )}
+        </>
     );
 };
 
 export default Cart;
+
+const PaymentWrapper = styled.div`
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 250px;
+`;

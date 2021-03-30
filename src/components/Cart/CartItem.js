@@ -1,66 +1,67 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-// import { UPDATE_CART } from "../state/cart";
+import { decreaseQtyAction, increaseQtyAction, removeFromCartAction } from "../../Redux/Cart/CartActions";
+import styled from 'styled-components';
 import Counter from "./Counter";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const CartItem = ({ data }) => {
     const dispatch = useDispatch();
 
-	const handleIncrement = () => {
-		// dispatch({
-		// 	type: UPDATE_CART,
-		// 	payload: { ...data, qty: data.qty + 1 },
-		// });
+	const handleIncreaseQty = () => {
+		dispatch(increaseQtyAction(data._id));
 	};
 
-	const handleDecrement = () => {
-		// dispatch({
-		// 	type: UPDATE_CART,
-		// 	payload: { ...data, qty: data.qty - 1 },
-		// });
+	const handleDecreaseQty = () => {
+		dispatch(decreaseQtyAction(data._id));
 	};
 
-	const handleAdjustment = (qty) => {
-		// dispatch({
-		// 	type: UPDATE_CART,
-		// 	payload: { ...data, qty },
-		// });
+	const handleClearCart = () => {
+		dispatch(removeFromCartAction(data._id));
 	};
+
     return (
 		<>
-			<div>
-				<div className="flex items-center my-5">
-					<Link to={`/product/${data.slug}`}>
-						<img src={data.image} alt={data.title} className="thumb" />
+			<CartItemWrapper>
+				<CartItemLine>
+					<Link to={`/products/${data._id}`}>
+						<ProductImage src={data.image} alt={data.title} />
 					</Link>
-					<h3 className="font-semibold w-4/6 ml-5 flex-grow">
-						<Link to={`/product/${data.slug}`}>{data.title}</Link>
+					<h3 style={{ overflowWrap: 'break-word'}}>
+						<Link to={`/products/${data._id}`}>{data.title}</Link>
 					</h3>
 					<Counter
-						count={data.qty}
-						{...{ handleIncrement, handleDecrement, handleAdjustment }}
+						count={data.quantity}
+						{...{ handleIncreaseQty, handleDecreaseQty }}
 					/>
-					<span className="text-right price">
-						${(data.price * data.qty).toFixed(2)}
+					<span>
+						${(data.price * data.quantity).toFixed(2)}
 					</span>
-				</div>
+                    <DeleteOutlined onClick={handleClearCart} />
+				</CartItemLine>
 				<hr />
-			</div>
-			<style>{`
-                .thumb {
-                    width: 60px;
-                    height: 60px;
-                    object-fit: cover;
-                    border-radius: 10px;
-                }
-
-				.price {
-					width: 90px;
-				}
-            `}</style>
+			</CartItemWrapper>
 		</>
 	);
 };
 
 export default CartItem;
+
+const CartItemWrapper = styled.div`
+
+`;
+
+const ProductImage = styled.img`
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+`;
+
+const CartItemLine = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0px;
+`;

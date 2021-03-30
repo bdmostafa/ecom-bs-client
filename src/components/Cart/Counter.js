@@ -1,47 +1,52 @@
 import React from 'react';
+import styled from 'styled-components';
 
 const Counter = ({
-	count,
-	handleIncrement,
-	handleDecrement,
-	handleAdjustment,
+    count,
+    handleIncreaseQty,
+    handleDecreaseQty
 }) => {
-    const updateQty = (e) => {
-		if (e.target.value > 0) {
-			handleAdjustment(e.target.value);
-		}
-	};
+
     return (
-		<>
-			<div className="flex items-center">
-				<button className="focus:outline-none" onClick={handleIncrement}>
-					+
-				</button>
-				<input
-					value={count}
-					className="value text-center text-sm focus:outline-none mx-2"
-					onChange={updateQty}
-				/>
-				<button className="focus:outline-none" onClick={handleDecrement}>
-					-
-				</button>
-			</div>
-			<style jsx>{`
-				.value {
-					width: 35px;
-					border: 1px solid rgb(179 179 179 / 50%);
-					border-radius: 5px;
-					color: rgba(0, 0, 0, 0.7);
-				}
+        <>
+            <CountWrapper>
+                <StyledButton onClick={handleIncreaseQty}>
+                    +
+				</StyledButton>
+                <input
+                    value={count}
+                    className="value"
+                />
+                <StyledButton onClick={handleDecreaseQty}>
+                    -
+				</StyledButton>
+            </CountWrapper>
+            <style jsx>{`
+				
 
 				button {
-					font-weight: bold;
-					font-size: 20px;
-					margin-top: -5px;
+					
 				}
 			`}</style>
-		</>
-	);
+        </>
+    );
 };
 
 export default Counter;
+
+const CountWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    .value {
+        width: 35px;
+        border: 1px solid rgb(179 179 179 / 50%);
+        border-radius: 5px;
+        color: rgba(0, 0, 0, 0.7);
+    }
+`;
+
+const StyledButton = styled.button`
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: -5px;
+`;
