@@ -122,7 +122,7 @@ export const deleteUser = (id) => async (dispatch) => {
     dispatch(fetchUserAction);
     try {
         const user = await url.deleteUser(id);
-
+console.log(user)
         if (user.data) {
             return dispatch(deleteUserAction(user.data));
         }

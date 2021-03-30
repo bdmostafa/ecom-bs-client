@@ -91,10 +91,10 @@ export const fetchProduct = (id) => async (dispatch) => {
     }
 }
 
-export const createProduct = (productInfo) => async (dispatch) => {
+export const createNewProduct = (productInfo) => async (dispatch) => {
     dispatch(fetchProductAction);
     try {
-        const product = await url.createProduct(productInfo);
+        const product = await url.createProductNew(productInfo);
 
         if (product.data) {
             return dispatch(createProductAction(product.data));

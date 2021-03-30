@@ -2,13 +2,15 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import ProductCard from '../../components/ProductCard';
 import styled from 'styled-components';
-import { Row } from 'antd';
+import { Image, Row } from 'antd';
+import logo from '../../assets/ebayLogo.png';
 
 const Products = () => {
     const products = useSelector(state => state.products.products);
 
     return (
         <AllProductsWrapper>
+            {/* <Image src={logo} style={{marginLeft: '50px'}}/> */}
             <Title>All Products</Title>
             <Row gutter={[32, 32]} style={{display: 'flex'}}>
             {products?.map(product => (
@@ -25,7 +27,7 @@ const Products = () => {
 export default Products;
 
 const AllProductsWrapper = styled.div`
-    padding: 100px;
+    padding: 50px;
     // display: flex;
 `;
 

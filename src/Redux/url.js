@@ -40,11 +40,11 @@ const client = () => {
 		getProduct: (id) => {
 			return axios.get(`${url}/products/${id}`);
 		},
-        createProduct: (productInfo) => {
+        createProductNew: (productInfo) => {
 			return axios.post(`${url}/products/create`, productInfo);
 		},
         updateProduct: (id, productInfo) => {
-			return axios.patch(`${url}/products/update/${id}`, productInfo);
+			return axios.patch(`${url}/products/update/${id}`, productInfo, {withCredentials: true, credentials: 'include'});
 		},
         deleteProduct: (id) => {
 			return axios.delete(`${url}/products/delete/${id}`);

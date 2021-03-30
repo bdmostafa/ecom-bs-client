@@ -19,6 +19,7 @@ import Products from '../Products';
 import { fetchAllProducts } from '../../Redux/Product/ProductActions';
 import CategoryProducts from '../HomePage/PopularCategories/CategoryProducts';
 import ProductDetails from '../Products/ProductDetails';
+import Dashboard from '../Dashboard';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,12 @@ function App() {
     <Layout style={{ background: 'white' }}>
       <Router>
         <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
           <Route exact path="/users">
             <UserDetails />
           </Route>
@@ -61,9 +68,6 @@ function App() {
           </Route>
           <Route path="/products/generate-products">
             <Products />
-          </Route>
-          <Route exact path="/">
-            <HomePage />
           </Route>
           <Route path="*">
             <NoFound />

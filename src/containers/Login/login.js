@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, Image } from 'antd';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { userLogin } from '../../Redux/Login/LoginActions';
+import { fetchUser } from '../../Redux/User/UserActions';
+import logo from '../../assets/ebayLogo.png';
 
 const LoginPage = () => {
-    // const user = useSelector((state) => state.LoginReducer);
+    const loggedInUser = useSelector((state) => state.login?.loggedInUser);
+    const [user, setUser] = useState({});
+
     const history = useHistory();
     const dispatch = useDispatch()
 
@@ -17,15 +21,23 @@ const LoginPage = () => {
             email: values.email,
             password: values.password
         }
-        dispatch(userLogin(userData))
+        dispatch(userLogin(userData));
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
+    useEffect(() => {
+        setUser(loggedInUser)
+        if(user?.role) {
+            history.push('/dashboard')
+        }
+    }, [loggedInUser])
+
     return (
         <FormWrapper>
+            <Image src={logo} style={{marginLeft: '50px'}}/>
             <Title>Login</Title>
             <Text>Don't have an account? Sign in <Link to="/users/create">Here</Link> </Text>
             <Form

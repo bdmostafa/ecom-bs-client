@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUsers } from '../../Redux/User/UserActions';
+import UsersTable from '../../components/UsersTable';
+import { deleteUser, fetchAllUsers } from '../../Redux/User/UserActions';
 
 const AllUsers = () => {
     const users = useSelector((state) => state.users.users);
@@ -17,7 +18,7 @@ const AllUsers = () => {
 
     return (
         <div>
-            {users?.map(user => <p>{user.name}</p>)}
+            <UsersTable users={users} />
         </div>
     );
 };

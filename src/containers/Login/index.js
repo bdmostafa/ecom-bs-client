@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, Image } from 'antd';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from '../../Redux/User/UserActions';
+import logo from '../../assets/ebayLogo.png'
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Register = () => {
 
     return (
         <FormWrapper>
+            <Image src={logo} style={{marginLeft: '75px'}}/>
             <Title>Create an account</Title>
             <Text>Already have an account? Login <Link to="/users/login">Here</Link> </Text>
             <Form

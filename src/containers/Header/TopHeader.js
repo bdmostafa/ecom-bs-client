@@ -24,12 +24,12 @@ const TopHeader = () => {
                 <span>Hi! {" "}</span>
                 <Menu.Item key="login">
                     
-                    <LinkedMenu to="/login" target="_blank" rel="noopener noreferrer">
+                    <LinkedMenu to="/users/login" rel="noopener noreferrer">
                         Sign in
                     </LinkedMenu>
                 </Menu.Item>
                 <Menu.Item key="register">
-                    <LinkedMenu to="/register" target="_blank" rel="noopener noreferrer">
+                    <LinkedMenu to="users/create" rel="noopener noreferrer">
                         Register
                     </LinkedMenu>
                 </Menu.Item>

@@ -23,12 +23,11 @@ const HomePage = () => {
         listOfCategories = listOfCategories.sort().filter((v, i) => listOfCategories.indexOf(v) === i);
 
         setCategoriesName(listOfCategories);
-        
-    }, [products])
 
-    console.log("cat======", categories)
+    }, [products]);
+
     return (
-        <HomeWrapper>/ .xc/c/c
+        <HomeWrapper>
             <Header />
             <MegaMenu />
             <Banner />
