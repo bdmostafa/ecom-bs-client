@@ -10,27 +10,52 @@ import Avatar from 'antd/lib/avatar/avatar';
 const HeaderInner = () => {
     const cart = useSelector((state) => state.cart.cart);
     const user = useSelector((state) => state.users.user);
-    
+
     return (
         <HeaderWrapper>
             <Row gutter={[48, 32]}>
-                <Col span={4} className="left-side">
-                    <Image
-                        width={100}
-                        src={logo}
-                    />
+                <Col span={12} className="left-side">
+                    <Link to="/">
+                        <Image
+                            width={100}
+                            src={logo}
+                            style4={{paddingLeft: '10px'}}
+                        />
+                    </Link>
                 </Col>
-                <Col span={4}>
+                
                 {
                         user && 
+                        <Col offset={2}>
                         <Link to="/users/me">
                             <Avatar
                                 src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                             />
                         </Link>
-                    }
-                </Col>
-                <Col span={4}>
+                        </Col>
+                }
+                
+                
+                {
+                        !user && 
+                        <Col offset={2}>
+                        <Link to="/users/login">
+                            Login
+                        </Link>
+                        </Col>
+                }
+                
+                
+                {
+                        !user && 
+                        <Col offset={2}>
+                        <Link to="/users/create">
+                            Register
+                        </Link>
+                        </Col>
+                }
+                
+                <Col offset={2}>
                 <Link to="/cart">
                         <CartArea className={cart?.length ? 'active' : ''}>
                             <ShoppingCartOutlined />
@@ -53,8 +78,13 @@ const HeaderInner = () => {
 export default HeaderInner;
 
 const HeaderWrapper = styled.div`
+    background: black;
+    padding: 10px;
     .left-side {
         float: left;
+    }
+    a {
+        color: white;
     }
 `;
 
@@ -68,94 +98,6 @@ const CartArea = styled.span`
 
 const CartLength = styled.span`
     position: relative;
-    top: -5px;
-    left: -10px;
+    top: -10px;
+    left: 3px;
 `;
-
-
-
-
-
-// const { SubMenu } = Menu;
-
-// const TopHeader = () => {
-    
-//     const [current, setCurrent] = useState('')
-
-//     const handleClick = e => {
-//         console.log('click ', e);
-//         setCurrent({ current: e.key });
-//     };
-
-//     return (
-//         <MenuWrapper onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-//             <Menu.ItemGroup className="menu-left" style={{ float: 'left' }}>
-//                 <Menu.Item key="login">
-//                     <LinkedMenu to="/users/login" rel="noopener noreferrer">
-//                         Sign in
-//                     </LinkedMenu>
-//                 </Menu.Item>
-//                 <Menu.Item key="register">
-//                     <LinkedMenu to="users/create" rel="noopener noreferrer">
-//                         Register
-//                     </LinkedMenu>
-//                 </Menu.Item>
-//                 <Menu.Item key="shop">
-//                     Shop
-//                 </Menu.Item>
-//             </Menu.ItemGroup>
-
-//             <Menu.ItemGroup className="menu-right" style={{ float: 'right' }}>
-//                 <Menu.Item key="profile">
-//                     {
-//                         user && 
-//                         <Link to="/users/me">
-//                             <Avatar
-//                                 src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-//                             />
-//                         </Link>
-//                     }
-                    
-//                 </Menu.Item>
-//                 <Menu.Item key="cart">
-//                     <Link to="/cart">
-//                         <CartArea className={cart?.length ? 'active' : ''}>
-//                             <ShoppingCartOutlined />
-
-//                             {cart.length ? (
-//                                 <CartLength>
-//                                     {cart.length}
-//                                 </CartLength>
-//                             ) : null}
-//                         </CartArea>
-//                     </Link>
-
-//                 </Menu.Item>
-//             </Menu.ItemGroup>
-//         </MenuWrapper>
-//     );
-
-// };
-
-// export default TopHeader;
-
-// const MenuWrapper = styled(Menu)`
-//     color: black;
-//     border-top: 1px solid black;
-//     border-bottom: 1px solid gray;
-
-//     .menu-right .ant-menu-item-group-list {
-//         display: flex;
-//         margin-right: 20px;
-//     }
-
-//     .menu-left .ant-menu-item-group-list {
-//         display: flex;
-//     }
-// `;
-
-// const LinkedMenu = styled(Link)`
-//     margin: 0px 0px;
-//     color: blue;
-// `;
-

@@ -23,30 +23,32 @@ const HeaderSearch = () => {
     const menu = (
         <Menu>
             {categoriesName.map(cat => (
-                    <Menu.Item>
-                        <Link to={{ pathname: `/products/category/${cat}`, param: cat}}>
-                                {cat}
-                        </Link>
-                        </Menu.Item>
-                   
-                ))}
+                <Menu.Item>
+                    <Link to={{ pathname: `/products/category/${cat}`, param: cat }}>
+                        {cat}
+                    </Link>
+                </Menu.Item>
+
+            ))}
         </Menu>
-      );
+    );
 
     return (
-        <Row gutter={[8, 8]} style={{alignItems: 'center'}}>
+        <Row gutter={[8, 8]} style={{ alignItems: 'center' }}>
             <Col span={2}>
-            <Image
-                width={100}
-                src={logo}
-            />
+                <Link to="/">
+                    <Image
+                        width={100}
+                        src={logo}
+                    />
+                </Link>
             </Col>
             <Col span={4}>
-            <Dropdown overlay={menu}>
-                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                Shop By Category <DownOutlined />
-                </a>
-            </Dropdown>
+                <Dropdown overlay={menu}>
+                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        Shop By Category <DownOutlined />
+                    </a>
+                </Dropdown>
             </Col>
             <Col span={16}>
                 <SearchProduct

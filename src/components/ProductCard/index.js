@@ -6,13 +6,13 @@ import styled from 'styled-components';
 
 const ProductCard = ({ product: { _id, title, price, category, image, description } }) => {
     return (
-        <Col xm={22} sm={16} md={12} lg={8}>
+        <Col xs={24} sm={12} md={8} lg={6} xl={6}>
             <Link to={`/products/${_id}`}>
                 <SingleProductCard
                     hoverable
-                    cover={<ProductImg alt={title} src={image} />}
+                    cover={<ProductImg alt={title} src={image} preview={false} />}
                 >
-                    <Meta title={title} description={<strong>{`$${price}`}</strong>} />
+                    <CardBottom title={<span style={{overflowWrap: 'break-word'}}>{title}</span>} description={<strong>{`$${price}`}</strong>} />
                 </SingleProductCard>
             </Link>
         </Col>
@@ -22,10 +22,18 @@ const ProductCard = ({ product: { _id, title, price, category, image, descriptio
 export default ProductCard;
 
 const ProductImg = styled(Image)`
-    // width: 175px;
+    width: 150px;
+    padding: 10px;
+    margin-left: 30px;
 `;
 
 const SingleProductCard = styled(Card)`
-    // height: 340px;
+    height: 350px;
     padding: 20px;
+`;
+
+const CardBottom = styled(Meta)`
+    position: absolute;
+    bottom: 10px;
+    width: 170px;
 `;

@@ -1,20 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Col, Image, Row } from 'antd';
-// import AddToCart from '../../containers/AddToCart';
 import { StarFilled } from '@ant-design/icons';
 import AddToCart from '../Cart/AddToCart';
-// import AddToCart from '../AddToCart';
 
 const SingleProductDetails = (props) => {
     return (
         <ProductDetailsWrapper>
 
             <Row gutter={[32, 32]} className="product-details">
-                <Col xm={24} sm={20} md={12} lg={12}>
-                    <ProductImage src={props?.image}></ProductImage>
+                <Col xm={24} sm={24} md={24} lg={12}>
+                    <ProductImage preview={false} src={props?.image}></ProductImage>
                 </Col>
-                <Col xm={24} sm={20} md={12} lg={12}>
+                <Col xm={24} sm={24} md={24} lg={12}>
                     <Title>{props?.title}</Title>
                     <span style={{ paddingRight: "5px" }}> 102 Product ratings </span>
                     {Array.from(Array(3), (e) => (
@@ -109,4 +107,6 @@ const ProductPrice = styled.h3`
 const ProductImage = styled(Image)`
     border: 1px solid #e2e2e2;
     border-radius: 5px;
+    width: 100%;
+    max-height: 460px;
 `;
