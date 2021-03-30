@@ -1,16 +1,21 @@
-import { Col, Row } from 'antd';
+import { Col, Image, Row } from 'antd';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Icon, { ShoppingCartOutlined, BellOutlined, DownOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, BellOutlined, DownOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons'
 
 import { Menu } from 'antd';
 
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import Avatar from 'antd/lib/avatar/avatar';
 
 const { SubMenu } = Menu;
 
 const TopHeader = () => {
+    const cart = useSelector((state) => state.cart.cart);
+    const user = useSelector((state) => state.users.user);
     const [current, setCurrent] = useState('')
 
     const handleClick = e => {
@@ -20,10 +25,8 @@ const TopHeader = () => {
 
     return (
         <MenuWrapper onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-            <Menu.ItemGroup className="menu-left" style={{float: 'left'}}>
-                <span>Hi! {" "}</span>
+            <Menu.ItemGroup className="menu-left" style={{ float: 'left' }}>
                 <Menu.Item key="login">
-                    
                     <LinkedMenu to="/users/login" rel="noopener noreferrer">
                         Sign in
                     </LinkedMenu>
@@ -33,34 +36,36 @@ const TopHeader = () => {
                         Register
                     </LinkedMenu>
                 </Menu.Item>
-                <Menu.Item key="dailyDeals">
-                    Daily Deals
-                </Menu.Item>
-                <Menu.Item key="helpNContact">
-                    Help & Contact
+                <Menu.Item key="shop">
+                    Shop
                 </Menu.Item>
             </Menu.ItemGroup>
 
-            <Menu.ItemGroup className="menu-right" style={{float: 'right'}}>
-                <Menu.Item key="shipTo">
-                    Ship to
-                </Menu.Item>
-                <Menu.Item key="sell">
-                    Sell
-                </Menu.Item>
-                <SubMenu key="watchList" title={<span>Watchlist <DownOutlined /></span>}>
-                    <Menu.Item key="Watchlist:1">Watchlist 1</Menu.Item>
-                    <Menu.Item key="Watchlist:2">Watchlist 2</Menu.Item>
-                </SubMenu>
-                <SubMenu key="myEBay" title={<span>My eBay <DownOutlined /></span>}>
-                    <Menu.Item key="myebay:1">myebay 1</Menu.Item>
-                    <Menu.Item key="myebay:2">myebay 2</Menu.Item>
-                </SubMenu>
-                <Menu.Item key="notification">
-                    <BellOutlined />
+            <Menu.ItemGroup className="menu-right" style={{ float: 'right' }}>
+                <Menu.Item key="profile">
+                    {
+                        user && 
+                        <Link to="/users/me">
+                            <Avatar
+                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            />
+                        </Link>
+                    }
+                    
                 </Menu.Item>
                 <Menu.Item key="cart">
-                    <ShoppingCartOutlined />
+                    <Link to="/cart">
+                        <CartArea className={cart?.length ? 'active' : ''}>
+                            <ShoppingCartOutlined />
+
+                            {cart.length ? (
+                                <CartLength>
+                                    {cart.length}
+                                </CartLength>
+                            ) : null}
+                        </CartArea>
+                    </Link>
+
                 </Menu.Item>
             </Menu.ItemGroup>
         </MenuWrapper>
@@ -86,6 +91,20 @@ const MenuWrapper = styled(Menu)`
 `;
 
 const LinkedMenu = styled(Link)`
-    margin: 0px 5px;
+    margin: 0px 0px;
     color: blue;
+`;
+
+const CartArea = styled.span`
+    .active {
+        background: peachpuff;
+        padding: 7px;
+        border-radius: 25%;
+    }
+`;
+
+const CartLength = styled.span`
+    position: relative;
+    top: -5px;
+    left: -10px;
 `;

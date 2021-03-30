@@ -31,9 +31,9 @@ const PopularCategories = () => {
             <Row gutter={[32, 32]}>
 
                 {categoriesName.map(cat => (
-                    <Col span={4} key={cat} name={cat} className="cat-name">
+                    <Col xs={24} sm={12} md={8} lg={6} xl={4} key={cat} name={cat} className="cat-name">
                         <Link to={{ pathname: `/products/category/${cat}`, param: cat}}>
-                                <CircleImage src={randomImage(products.filter(product => product.category === cat))} />
+                                <CircleImage preview={false} src={randomImage(products.filter(product => product.category === cat))} />
                                 <CategoriesName> {cat} </CategoriesName>
                         </Link>
                     </Col>
@@ -51,8 +51,8 @@ const CategoriesWrapper = styled.div`
 
     .cat-name {
         align-items: center;
-    justify-content: center;
-    display: inline-grid;
+        justify-content: center;
+        display: inline-grid;
     }
 `;
 
@@ -63,7 +63,9 @@ const Title = styled.h2`
 `;
 
 const CircleImage = styled(Image)`
-    width: 175px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 `;
 
 const CategoriesName = styled.p`

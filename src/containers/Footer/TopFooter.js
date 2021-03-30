@@ -1,4 +1,4 @@
-import { Row, Col } from 'antd';
+import { Row, Col, Image } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import fb from '../../assets/fb.svg';
@@ -6,6 +6,7 @@ import { List } from 'antd';
 import { Link } from 'react-router-dom';
 import Avatar from 'antd/lib/avatar/avatar';
 import CountriesButton from '../../components/CountriesButton';
+import logo from '../../assets/ebayLogo.png';
 
 const dataBuy = [
     {
@@ -108,7 +109,13 @@ const TopFooter = () => {
     return (
         <TopFooterWrapper>
             <Row gutter={[48, 32]}>
-                <Col span={6}>
+                <Col xs={24} sm={12} md={8} lg={6} xl={6}>
+                    <ListGroup>
+                        <Image
+                            width={100}
+                            src={logo}
+                        />
+                    </ListGroup>
                     <ListGroup
                         size="small"
                         header={<Title>Buy</Title>}
@@ -123,7 +130,7 @@ const TopFooter = () => {
                         }
                     />
                 </Col>
-                <Col span={6}>
+                <Col xs={24} sm={12} md={8} lg={6} xl={6}>
                     <ListGroup
                         size="small"
                         header={<Title>Sell</Title>}
@@ -145,7 +152,7 @@ const TopFooter = () => {
                         renderItem={item => <ListItem>{item}</ListItem>}
                     />
                 </Col>
-                <Col span={6}>
+                <Col xs={24} sm={12} md={8} lg={6} xl={6}>
                     <ListGroup
                         size="small"
                         header={<Title>eBay Companies</Title>}
@@ -168,7 +175,7 @@ const TopFooter = () => {
                         }
                     />
                 </Col>
-                <Col span={6}>
+                <Col xs={24} sm={12} md={8} lg={6} xl={6}>
                     <ListGroup
                         size="small"
                         header={<Title>Help & Contact</Title>}

@@ -22,7 +22,6 @@ const AddToCart = (props) => {
     useEffect(() => {
         setIsInCart(cartItem.findIndex((item) => item._id == product._id));
     }, [cartItem])
-    console.log(isInCart)
 
     const handleAddToCart = (e) => {
         if (isInCart == -1) {

@@ -8,7 +8,7 @@ const WatchList = () => {
     return (
         <WatchListWrapper>
             <Row gutter={[32, 32]} style={{alignItems: 'center'}}>
-                <Col span={6}>
+                <Col xs={24} sm={10} md={8} lg={6} xl={4}>
                     <LeftColumn>
                         <Title>
                             Get the Item Before It's Gone!
@@ -23,7 +23,7 @@ const WatchList = () => {
                     </LeftColumn>
                 </Col>
 
-                <Col span={18}>
+                <Col xs={24} sm={14} md={16} lg={18} xl={20}>
                     <CTAImage src={ctaBanner} />
                 </Col>
             </Row>

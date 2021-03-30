@@ -6,13 +6,16 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './Redux/Store';
+import { CookiesProvider } from "react-cookie";
 
 ReactDOM.render(
   // <React.StrictMode>
+  <CookiesProvider>
     <Provider store={store}>
       <GlobalStyles />
       <App />
-    </Provider>,
+    </Provider>
+    </CookiesProvider>,
   // </React.StrictMode>,
   document.getElementById('root')
 );

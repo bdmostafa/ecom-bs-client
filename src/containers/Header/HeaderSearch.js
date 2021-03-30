@@ -1,20 +1,35 @@
 import { Col, Image, Row, Menu, Dropdown, Input } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../../assets/ebayLogo.png';
 import { DownOutlined } from '@ant-design/icons';
 import SearchProduct from '../../components/SearchProduct';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const HeaderSearch = () => {
+    const products = useSelector(state => state.products.products);
+    const [categoriesName, setCategoriesName] = useState([]);
+
+    useEffect(() => {
+        // list all categories name
+        let listOfCategories = products.map(product => product.category)
+        // sort and remove duplicates
+        listOfCategories = listOfCategories.sort().filter((v, i) => listOfCategories.indexOf(v) === i);
+
+        setCategoriesName(listOfCategories);
+
+    }, [products])
+
     const menu = (
         <Menu>
-          <Menu.ItemGroup title="Mens">
-            <Menu.Item>Shirt</Menu.Item>
-            <Menu.Item>Pant</Menu.Item>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup title="Women">
-            <Menu.Item>Shari</Menu.Item>
-            <Menu.Item>Lehenga</Menu.Item>
-          </Menu.ItemGroup>
+            {categoriesName.map(cat => (
+                    <Menu.Item>
+                        <Link to={{ pathname: `/products/category/${cat}`, param: cat}}>
+                                {cat}
+                        </Link>
+                        </Menu.Item>
+                   
+                ))}
         </Menu>
       );
 

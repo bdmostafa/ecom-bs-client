@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import { AudioOutlined, SearchOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { searchTermAction } from '../../Redux/Misc/MiscActions';
 
 const { Search } = Input;
 
 const SearchProduct = props => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const dispatch = useDispatch();
+
     const suffix = (
         <AudioOutlined
           style={{
@@ -15,10 +20,14 @@ const SearchProduct = props => {
         />
       );
       
-      const onSearch = value => console.log(value);
+      const onSearch = value => setSearchTerm(value);
+
+      useEffect(() => {
+          dispatch(searchTermAction(searchTerm));
+      }, [searchTerm])
+
     return (
         <SearchWrapper>
-            <SearchOutlined className="search-icon" />
             <Search
                 placeholder={props.placeholder}
                 enterButton={props.enterButton}

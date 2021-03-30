@@ -30,7 +30,7 @@ const client = () => {
 			return axios.post(`${url}/users/login`, userInfo, {withCredentials: true, credentials: 'include'});
 		},
         userLogout: () => {
-			return axios.post(`${url}/users/logout`, { withCredentials: true });
+			return axios.post(`${url}/users/logout`, { withCredentials: true, credentials: 'include' });
 		},
 
         // Product Urls

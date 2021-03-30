@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Col, Image, Row } from 'antd';
-import AddToCart from '../../containers/AddToCart';
+// import AddToCart from '../../containers/AddToCart';
 import { StarFilled } from '@ant-design/icons';
+import AddToCart from '../Cart/AddToCart';
+// import AddToCart from '../AddToCart';
 
 const SingleProductDetails = (props) => {
     return (

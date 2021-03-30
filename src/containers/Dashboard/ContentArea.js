@@ -10,7 +10,7 @@ import GenerateProducts from '../Products/GenerateProducts';
 import ProductsTable from '../Products/ProductsTable';
 import SingleOrder from '../Orders/SingleOrder';
 import AllUsers from '../Users/AllUsers';
-import LoggedInUser from '../Users/LoggedInUser';
+import Profile from '../Users/Profile';
 import DeleteUser from '../Users/DeleteUser';
 
 const ContentArea = () => {
@@ -44,7 +44,7 @@ const ContentArea = () => {
                           : currentPath === '/dashboard/all-users'
                             ? <AllUsers />
                             : currentPath === '/dashboard/loggedIn-users'
-                              ? <LoggedInUser />
+                              ? <Profile />
                               : currentPath === '/dashboard/delete-users-by-id'
                                 ? <DeleteUser />
                                 : <ProductsTable />

@@ -1,5 +1,6 @@
 import * as Types from './LoginTypes';
 import url from '../url';
+import { message } from "antd";
 
 export const userLoginAction = () => {
     return {
@@ -36,10 +37,17 @@ export const userLogin = (userData) => async (dispatch) => {
 
             if(user.data) {
                 dispatch(loginSuccessAction(user.data));
+                message.success("Login Success");
+                window.setTimeout(() => {
+                    window.location.href = "/";
+                }, 500);
+                return;
             }
             
         } catch (err) {
             dispatch(loginFailureAction(err.message));
+            message.error(err.message);
+            return;
         }
 };
 
@@ -52,9 +60,16 @@ export const userLogout = () => async (dispatch) => {
 
         if(user.data) {
             dispatch(userLogoutAction(user.data));
+            message.success("Logout Success");
+                window.setTimeout(() => {
+                    window.location.href = "/";
+                }, 500);
+            return;
         }
         
     } catch (err) {
         dispatch(loginFailureAction(err.message));
+        message.error(err.message);
+        return;
     }
 };

@@ -28,12 +28,12 @@ const LoginPage = () => {
         console.log('Failed:', errorInfo);
     };
 
-    useEffect(() => {
-        setUser(loggedInUser)
-        if(user?.role) {
-            history.push('/dashboard')
-        }
-    }, [loggedInUser])
+    // useEffect(() => {
+    //     setUser(loggedInUser)
+    //     if(user?.role) {
+    //         history.push('/dashboard')
+    //     }
+    // }, [dispatch])
 
     return (
         <FormWrapper>

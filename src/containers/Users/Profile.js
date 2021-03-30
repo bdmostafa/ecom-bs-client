@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from '../../Redux/User/UserActions';
 
-const LoggedInUser = () => {
+const Profile = () => {
     const user = useSelector((state) => state.users.user);
     console.log(user);
 
@@ -23,4 +23,4 @@ const LoggedInUser = () => {
     );
 };
 
-export default LoggedInUser;
+export default Profile;

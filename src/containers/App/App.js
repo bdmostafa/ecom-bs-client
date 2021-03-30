@@ -9,69 +9,52 @@ import {
   Link
 } from "react-router-dom";
 import HomePage from '../HomePage';
-import Login from '../Login/login';
-import Register from '../Login';
-import NoFound from '../NoFound';
+import Login from '../Login/Login';
+import Register from '../Login/Register';
+import NoFound from '../404.js';
 import Orders from '../Orders';
 import UserDetails from '../Users';
-import LoggedInUser from '../Users/LoggedInUser';
+import Profile from '../Users/Profile';
 import Products from '../Products';
 import { fetchAllProducts } from '../../Redux/Product/ProductActions';
 import CategoryProducts from '../HomePage/PopularCategories/CategoryProducts';
 import ProductDetails from '../Products/ProductDetails';
 import Dashboard from '../Dashboard';
+import { fetchUser } from '../../Redux/User/UserActions';
+import PrivateRoute from '../Login/PrivateRoute';
+import Logout from '../Login/Logout';
+import Cart from '../Cart';
 
 function App() {
   const dispatch = useDispatch();
 
-  const getProducts = useCallback(() => {
+  const apiCall = useCallback(() => {
     dispatch(fetchAllProducts());
+    dispatch(fetchUser());
   }, [dispatch]);
 
   useEffect(() => {
-    getProducts();
-  }, [getProducts]);
+    apiCall();
+  }, [apiCall]);
 
   return (
     <Layout style={{ background: 'white' }}>
       <Router>
         <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route exact path="/users">
-            <UserDetails />
-          </Route>
-          <Route path="/users/me">
-            <LoggedInUser />
-          </Route>
-          <Route path="/users/create">
-            <Register />
-          </Route>
-          <Route path="/users/login">
-            <Login />
-          </Route>
-          <Route path="/orders">
-            <Orders />
-          </Route>
-          <Route exact path="/products">
-            <Products />
-          </Route>
-          <Route path="/products/category/:catName">
-            <CategoryProducts />
-          </Route>
-          <Route path="/products/:productId">
-            <ProductDetails />
-          </Route>
-          <Route path="/products/generate-products">
-            <Products />
-          </Route>
-          <Route path="*">
-            <NoFound />
-          </Route>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/cart" component={Cart} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/users" component={UserDetails} />
+          <PrivateRoute exact path="/users/me" component={Profile} />
+          <Route exact path="/users/create" component={Register} />
+          <Route exact path="/users/login" component={Login} />
+          <Route exact path="/users/logout" component={Logout} />
+          <PrivateRoute exact path="/dashboard/orders" component={Orders} />
+          <PrivateRoute exact path="/dashboard/generate-products" component={Products} />
+          <Route exact path="/products" component={Products} />
+          <Route exact path="/products/category/:catName" component={CategoryProducts} />
+          <Route exact path="/products/:productId" component={ProductDetails} />
+          <Route path="*" component={NoFound} />
         </Switch>
       </Router>
     </Layout>

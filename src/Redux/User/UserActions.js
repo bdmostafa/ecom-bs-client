@@ -1,5 +1,6 @@
 import * as Types from './UserTypes';
 import url from '../url';
+import { message } from 'antd';
 
 export const fetchUserAction = () => {
     return {
@@ -69,7 +70,9 @@ export const fetchAllUsers = () => async (dispatch) => {
         const users = await url.getUsers();
 
         if (users.data) {
-            return dispatch(getAllUsersAction(users.data));
+            dispatch(getAllUsersAction(users.data));
+            message.success("All Users Loaded Successfully");
+            return;
         }
 
     } catch (error) {
@@ -96,11 +99,15 @@ export const createUser = (userInfo) => async (dispatch) => {
         const user = await url.createUser(userInfo);
 
         if (user.data) {
-            return dispatch(createUserAction(user.data));
+            dispatch(createUserAction(user.data));
+            message.success("You have been registered successfully.")
+            return;
         }
 
     } catch (error) {
-        return dispatch(userFailureAction(error));
+        dispatch(userFailureAction(error));
+        message.error(error.message)
+        return;
     }
 }
 
@@ -110,11 +117,15 @@ export const updateUser = (userInfo) => async (dispatch) => {
         const user = await url.updateUser(userInfo);
 
         if (user.data) {
-            return dispatch(updateUserAction(user.data));
+            dispatch(updateUserAction(user.data));
+            message.success("Your info has been updated successfully.")
+            return;
         }
 
     } catch (error) {
-        return dispatch(userFailureAction(error));
+        dispatch(userFailureAction(error));
+        message.error(error.message)
+        return;
     }
 }
 
@@ -122,9 +133,11 @@ export const deleteUser = (id) => async (dispatch) => {
     dispatch(fetchUserAction);
     try {
         const user = await url.deleteUser(id);
-console.log(user)
+
         if (user.data) {
-            return dispatch(deleteUserAction(user.data));
+            dispatch(deleteUserAction(user.data));
+            message.success("You have been unregistered successfully.");
+            return;
         }
 
     } catch (error) {
@@ -138,7 +151,9 @@ export const deleteUsers = (id) => async (dispatch) => {
         const user = await url.deleteUsers(id);
 
         if (user.data) {
-            return dispatch(deleteUsersAction(user.data));
+            dispatch(deleteUsersAction(user.data));
+            message.success("One user has been deleted successfully.");
+            return;
         }
 
     } catch (error) {

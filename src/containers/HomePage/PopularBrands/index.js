@@ -16,25 +16,30 @@ const PopularBrands = () => {
             </Heading>
 
             <Row gutter={[32, 32]}>
-                <Col span={4}>
-                    <CircleImage src={apple} />
-                    <CategoriesName> Apple </CategoriesName>
-                </Col>
-                <Col span={4}>
-                    <CircleImage src={apple} />
-                </Col>
-                <Col span={4}>
-                    <CircleImage src={apple} />
-                </Col>
-                <Col span={4}>
-                    <CircleImage src={apple} />
-                </Col>
-                <Col span={4}>
-                    <CircleImage src={apple} />
-                </Col>
-                <Col span={4}>
-                    <CircleImage src={apple} />
-                </Col>
+                <BrandColumn xs={24} sm={12} md={8} lg={6} xl={4}>
+                    <CircleImage preview={false} src="https://i.ibb.co/jbVr37f/lse-library-Mx1sgh-Czi-Ho-unsplash.jpg" />
+                    <CategoriesName> National Union </CategoriesName>
+                </BrandColumn>
+                <BrandColumn xs={24} sm={12} md={8} lg={6} xl={4}>
+                    <CircleImage preview={false} src="https://i.ibb.co/XLSZXtz/khadeeja-yasser-3-U9-L9-Chc3is-unsplash.jpg" />
+                    <CategoriesName> AKIEA </CategoriesName>
+                </BrandColumn>
+                <BrandColumn xs={24} sm={12} md={8} lg={6} xl={4}>
+                    <CircleImage preview={false} src="https://i.ibb.co/2S8T0tz/stanislav-vdovin-LXkwr-YG-Kvg-unsplash.jpg" />
+                    <CategoriesName> sure Coffee </CategoriesName>
+                </BrandColumn>
+                <BrandColumn xs={24} sm={12} md={8} lg={6} xl={4}>
+                    <CircleImage preview={false} src="https://i.ibb.co/5xn0Nng/lse-library-dd-Nkpl-Rhzv0-unsplash.jpg" />
+                    <CategoriesName> Men's League </CategoriesName>
+                </BrandColumn>
+                <BrandColumn xs={24} sm={12} md={8} lg={6} xl={4}>
+                    <CircleImage preview={false} src="https://i.ibb.co/C6YXNM4/mnz-3u-D8ao-UBIso-unsplash.jpg" />
+                    <CategoriesName> Maison Kitsune </CategoriesName>
+                </BrandColumn>
+                <BrandColumn xs={24} sm={12} md={8} lg={6} xl={4}>
+                    <CircleImage preview={false} src="https://i.ibb.co/4mmVPts/hamza-ali-CCuz-ANFz-Uo-Y-unsplash.jpg" />
+                    <CategoriesName> Adidas </CategoriesName>
+                </BrandColumn>
             </Row>
         </BrandsWrapper>
     );
@@ -44,6 +49,13 @@ export default PopularBrands;
 
 const BrandsWrapper = styled.div`
     padding: 50px;
+    justify-content: center;
+`;
+
+const BrandColumn = styled(Col)`
+    align-items: center;
+    justify-content: center;
+    display: inline-grid;
 `;
 
 const Heading = styled.div`
@@ -66,6 +78,8 @@ const SeeAll = styled.h4`
 `;
 
 const CircleImage = styled(Image)`
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
 `;
 

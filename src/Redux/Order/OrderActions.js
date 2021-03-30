@@ -1,5 +1,6 @@
 import * as Types from './OrderTypes';
 import url from '../url';
+import { message } from 'antd';
 
 export const fetchOrderAction = () => {
     return {
@@ -125,11 +126,14 @@ export const createOrder = (orderInfo) => async (dispatch) => {
         const order = await url.createOrder(orderInfo);
 
         if (order.data) {
-            return dispatch(createOrderAction(order.data));
+            dispatch(createOrderAction(order.data));
+            message.success("Order created successfully.");
+            return;
         }
 
     } catch (error) {
-        return dispatch(orderFailureAction(error));
+        dispatch(orderFailureAction(error));
+        message.error(error.message)
     }
 }
 
