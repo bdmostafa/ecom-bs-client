@@ -21,13 +21,6 @@ const Counter = ({
                     -
 				</StyledButton>
             </CountWrapper>
-            <style jsx>{`
-				
-
-				button {
-					
-				}
-			`}</style>
         </>
     );
 };
