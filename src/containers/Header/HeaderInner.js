@@ -19,44 +19,53 @@ const HeaderInner = () => {
                         <Image
                             width={100}
                             src={logo}
-                            style4={{paddingLeft: '10px'}}
+                            style4={{ paddingLeft: '10px' }}
                         />
                     </Link>
                 </Col>
-                
+
                 {
-                        user && 
+                    user && <>
                         <Col offset={2}>
-                        <Link to="/users/me">
-                            <Avatar
-                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                            />
-                        </Link>
+                            <Link to="/users/me">
+                                <Avatar
+                                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                />
+                            </Link>
                         </Col>
-                }
-                
-                
-                {
-                        !user && 
+
                         <Col offset={2}>
+                            <Link to="/users/logout">
+                                <Avatar
+                                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                />
+                            </Link>
+                        </Col>
+                    </>
+                }
+
+
+                {
+                    !user &&
+                    <Col offset={2}>
                         <Link to="/users/login">
                             Login
                         </Link>
-                        </Col>
+                    </Col>
                 }
-                
-                
+
+
                 {
-                        !user && 
-                        <Col offset={2}>
+                    !user &&
+                    <Col offset={2}>
                         <Link to="/users/create">
                             Register
                         </Link>
-                        </Col>
+                    </Col>
                 }
-                
+
                 <Col offset={2}>
-                <Link to="/cart">
+                    <Link to="/cart">
                         <CartArea className={cart?.length ? 'active' : ''}>
                             <ShoppingCartOutlined />
 

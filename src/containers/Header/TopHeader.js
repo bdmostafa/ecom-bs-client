@@ -42,17 +42,28 @@ const TopHeader = () => {
             </Menu.ItemGroup>
 
             <Menu.ItemGroup className="menu-right" style={{ float: 'right' }}>
-                <Menu.Item key="profile">
+                
                     {
                         user && 
-                        <Link to="/users/me">
-                            <Avatar
-                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                            />
-                        </Link>
+                        <Menu.Item key="profile">
+                            <Link to="/users/me">
+                                <Avatar
+                                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                />
+                            </Link>
+                        </Menu.Item>
+                    }
+                
+                    {
+                        user && 
+                        <Menu.Item key="logout">
+                            <Link to="/users/logout">
+                                Logout
+                            </Link>
+                        </Menu.Item>
                     }
                     
-                </Menu.Item>
+               
                 <Menu.Item key="cart">
                     <Link to="/cart">
                         <CartArea className={cart?.length ? 'active' : ''}>
