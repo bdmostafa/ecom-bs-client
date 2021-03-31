@@ -2,7 +2,7 @@ import { Col, Image, Row } from 'antd';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ShoppingCartOutlined, BellOutlined, DownOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, BellOutlined, DownOutlined, LogoutOutlined } from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons'
 
 import { Menu } from 'antd';
@@ -19,25 +19,53 @@ const TopHeader = () => {
     const [current, setCurrent] = useState('')
 
     const handleClick = e => {
-        console.log('click ', e);
         setCurrent({ current: e.key });
     };
 
     return (
         <MenuWrapper onClick={handleClick} selectedKeys={[current]} mode="horizontal">
             <Menu.ItemGroup className="menu-left" style={{ float: 'left' }}>
-                <Menu.Item key="login">
-                    <LinkedMenu to="/users/login" rel="noopener noreferrer">
-                        Sign in
-                    </LinkedMenu>
-                </Menu.Item>
-                <Menu.Item key="register">
-                    <LinkedMenu to="users/create" rel="noopener noreferrer">
-                        Register
-                    </LinkedMenu>
-                </Menu.Item>
+                {
+                    !user &&
+                    <Menu.Item key="login">
+                        <LinkedMenu to="/users/login" rel="noopener noreferrer">
+                            Sign in
+                        </LinkedMenu>
+                    </Menu.Item>
+                }
+
+                {
+                    !user &&
+                    <Menu.Item key="register">
+                        <LinkedMenu to="users/create" rel="noopener noreferrer">
+                            Register
+                        </LinkedMenu>
+                    </Menu.Item>
+                }
+
+                {
+                    user &&
+                    <Menu.Item key="home">
+                        <LinkedMenu to="/" rel="noopener noreferrer">
+                            Home
+                        </LinkedMenu>
+                    </Menu.Item>
+                }
+
+                {
+                    user &&
+                    <Menu.Item key="dashboard">
+                        <LinkedMenu to="/dashboard" rel="noopener noreferrer">
+                            Dashboard
+                        </LinkedMenu>
+                    </Menu.Item>
+                }
+               
+                
                 <Menu.Item key="shop">
-                    Shop
+                    <LinkedMenu to="/shop" rel="noopener noreferrer">
+                        Shop
+                    </LinkedMenu>
                 </Menu.Item>
             </Menu.ItemGroup>
 
@@ -57,9 +85,8 @@ const TopHeader = () => {
                     {
                         user && 
                         <Menu.Item key="logout">
-                            <Link to="/users/logout">
-                                Logout
-                            </Link>
+                            <LogoutOutlined style={{marginRight: '5px'}} />
+                                <Link to="/users/logout">Logout</Link>
                         </Menu.Item>
                     }
                     

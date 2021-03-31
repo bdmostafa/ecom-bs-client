@@ -2,7 +2,7 @@ import { Col, Image, Row } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { LogoutOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import logo from '../../assets/ebayLogo.png';
 import { useSelector } from 'react-redux';
 import Avatar from 'antd/lib/avatar/avatar';
@@ -35,11 +35,8 @@ const HeaderInner = () => {
                         </Col>
 
                         <Col offset={2}>
-                            <Link to="/users/logout">
-                                <Avatar
-                                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                                />
-                            </Link>
+                            <LogoutOutlined style={{color: 'white', marginRight: '5px'}} />
+                                <Link to="/users/logout">Logout</Link>
                         </Col>
                     </>
                 }

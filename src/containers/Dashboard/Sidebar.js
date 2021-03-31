@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
     DesktopOutlined,
@@ -8,26 +8,29 @@ import {
     UserOutlined,
     ShoppingOutlined,
     ShoppingCartOutlined,
+    LogoutOutlined,
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-class Sidebar extends React.Component {
-    state = {
-        collapsed: false,
-    };
+const Sidebar =() => {
+    const [collapse, setCollapse] = useState(false)
+    // state = {
+    //     collapsed: false,
+    // };
 
-    onCollapse = collapsed => {
-        console.log(collapsed);
-        this.setState({ collapsed });
+    const onCollapse = () => {
+        // console.log(collapsed);
+        // this.setState({ collapsed });
+        setCollapse(true)
     };
-
-    render() {
-        const { collapsed } = this.state;
+        const user = useSelector((state) => state.users.user);
+        // const { collapsed } = this.state;
         return (
-            <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} style={{ minHeight: '100vh' }}>
+            <Sider collapsible collapsed={collapse} onCollapse={() => onCollapse()} style={{ minHeight: '100vh' }}>
                 <div className="logo" />
                 <Menu theme="light" defaultSelectedKeys={['sub1']} mode="inline">
                     <Menu.Item key="1">
@@ -43,9 +46,13 @@ class Sidebar extends React.Component {
                         <Menu.Item key="4">
                             <Link to="/dashboard/create-product">Create A Product</Link>
                         </Menu.Item>
-                        <Menu.Item key="5">
-                            <Link to="/dashboard/generate-products">Generate Products</Link>
-                        </Menu.Item>
+                        {
+                            user?.role === 'superAdmin' && 
+                            <Menu.Item key="5">
+                                <Link to="/dashboard/generate-products">Generate Products</Link>
+                            </Menu.Item>
+                        }
+                        
                     </SubMenu>
                     <SubMenu key="sub2" icon={<ShoppingCartOutlined />} title="Orders">
                         <Menu.Item key="6">
@@ -72,10 +79,12 @@ class Sidebar extends React.Component {
                             <Link to="/dashboard/delete-users-by-id">Delete Users</Link>
                         </Menu.Item>
                     </SubMenu>
+                    <Menu.Item key="13" icon={<LogoutOutlined />}>
+                            <Link to="/users/logout">Logout</Link>
+                    </Menu.Item>
                 </Menu>
             </Sider>
         );
-    }
 }
 
 export default Sidebar;
