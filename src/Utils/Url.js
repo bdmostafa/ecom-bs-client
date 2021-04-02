@@ -44,7 +44,7 @@ const client = () => {
 			return axios.post(`${url}/products/create`, productInfo);
 		},
         updateProduct: (id, productInfo) => {
-			return axios.patch(`${url}/products/update/${id}`, productInfo, {withCredentials: true, credentials: 'include'});
+			return axios.patch(`${url}/products/update/${id}`, productInfo);
 		},
         deleteProduct: (id) => {
 			return axios.delete(`${url}/products/delete/${id}`);

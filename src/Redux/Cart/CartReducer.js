@@ -14,6 +14,7 @@ const INITIAL_STATE = {
 
       case Types.INCREASE_QTY: {
         const idx = state.cart.findIndex((item) => item._id === action.payload);
+        console.log(state.cart[idx])
         state.cart[idx].quantity = state.cart[idx].quantity + 1;
         return {
           ...state,

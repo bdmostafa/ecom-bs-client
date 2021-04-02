@@ -17,20 +17,20 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 const Sidebar =() => {
-    const [collapse, setCollapse] = useState(false)
+    const [collapsed, setCollapsed] = useState(false)
     // state = {
     //     collapsed: false,
     // };
-
-    const onCollapse = () => {
-        // console.log(collapsed);
+    console.log(collapsed);
+    const onCollapse = (collapsed) => {
+        console.log(collapsed);
         // this.setState({ collapsed });
-        setCollapse(true)
+        setCollapsed(true)
     };
         const user = useSelector((state) => state.users.user);
         // const { collapsed } = this.state;
         return (
-            <Sider collapsible collapsed={collapse} onCollapse={() => onCollapse()} style={{ minHeight: '100vh' }}>
+            <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} style={{ minHeight: '100vh' }}>
                 <div className="logo" />
                 <Menu theme="light" defaultSelectedKeys={['sub1']} mode="inline">
                     <Menu.Item key="1">

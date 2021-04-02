@@ -3,6 +3,7 @@ import * as Types from './ProductTypes';
 const INITIAL_STATE = {
   loading: false,
   products: [],
+  product: {},
   err: "",
 };
 

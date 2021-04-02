@@ -1,5 +1,5 @@
 import * as Types from './LoginTypes';
-import url from '../url';
+import url from '../../Utils/Url';
 import { message } from "antd";
 
 export const userLoginAction = () => {

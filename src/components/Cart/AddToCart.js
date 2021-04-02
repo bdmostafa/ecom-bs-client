@@ -5,11 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { increaseQtyAction, decreaseQtyAction, addToCartAction, removeFromCartAction } from '../../Redux/Cart/CartActions';
 import styled from 'styled-components';
 
-const AddToCart = (props) => {
-    const product = props.product;
+const AddToCart = ({ product }) => {
     const dispatch = useDispatch();
     const cartItem = useSelector((state) => state.cart.cart);
-    const [isInCart, setIsInCart] = useState(null);
+    const [isInCart, setIsInCart] = useState(false);
 
     const handleIncreaseQty = (e) => {
         dispatch(increaseQtyAction(product._id));
@@ -20,11 +19,17 @@ const AddToCart = (props) => {
     };
 
     useEffect(() => {
-        setIsInCart(cartItem.findIndex((item) => item._id == product._id));
-    }, [cartItem])
+        // console.log(cartItem.findIndex((item) => item._id == product._id))
+        if (cartItem.findIndex((item) => item._id == product._id) >= 0) {
+            setIsInCart(true);
+        } 
+
+        else setIsInCart(false);
+
+    }, [cartItem, product])
 
     const handleAddToCart = (e) => {
-        if (isInCart == -1) {
+        if (!isInCart) {
             dispatch(addToCartAction(product));
         } else {
             alert('This Product is Already In Cart')
@@ -33,20 +38,20 @@ const AddToCart = (props) => {
     const handleRemoveFromCart = (e) => {
         dispatch(removeFromCartAction(product._id));
     };
-
+// console.log("cart=====", isInCart)
     return (
         <CartWrapper>
             <QtyBtn>
                 <Button onClick={handleDecreaseQty}>
                     <MinusCircleFilled />
                 </Button>
-                <Qty>{props.product.quantity}</Qty>
+                <Qty>{product?.quantity ? product.quantity : 1 }</Qty>
                 <Button onClick={handleIncreaseQty}>
                     <PlusCircleFilled />
                 </Button>
             </QtyBtn>
             {
-                isInCart ? (
+                !isInCart ? (
                     <Button
                         type="primary"
                         icon={<ShoppingCartOutlined />}

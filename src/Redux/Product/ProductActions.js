@@ -1,5 +1,5 @@
 import * as Types from './ProductTypes';
-import url from '../url';
+import url from '../../Utils/Url';
 
 export const fetchProductAction = () => {
     return {

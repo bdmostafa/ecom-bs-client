@@ -1,5 +1,5 @@
 import * as Types from './OrderTypes';
-import url from '../url';
+import url from '../../Utils/Url';
 import { message } from 'antd';
 
 export const fetchOrderAction = () => {

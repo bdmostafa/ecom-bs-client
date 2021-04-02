@@ -46,11 +46,11 @@ function App() {
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/users" component={UserDetails} />
           <PrivateRoute exact path="/users/me" component={Profile} />
+          <PrivateRoute exact path="/dashboard/orders" component={Orders} />
+          <PrivateRoute exact path="/dashboard/generate-products" component={Products} />
           <Route exact path="/users/create" component={Register} />
           <Route exact path="/users/login" component={Login} />
           <Route exact path="/users/logout" component={Logout} />
-          <PrivateRoute exact path="/dashboard/orders" component={Orders} />
-          <PrivateRoute exact path="/dashboard/generate-products" component={Products} />
           <Route exact path="/products" component={Products} />
           <Route exact path="/products/category/:catName" component={CategoryProducts} />
           <Route exact path="/products/:productId" component={ProductDetails} />
