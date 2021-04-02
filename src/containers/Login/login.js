@@ -28,16 +28,11 @@ const LoginPage = () => {
         console.log('Failed:', errorInfo);
     };
 
-    // useEffect(() => {
-    //     setUser(loggedInUser)
-    //     if(user?.role) {
-    //         history.push('/dashboard')
-    //     }
-    // }, [dispatch])
-
     return (
         <FormWrapper>
-            <Image src={logo} style={{marginLeft: '50px'}}/>
+            <Link to="/">
+                <Image preview={false} src={logo} style={{marginLeft: '100px', width: '50%'}}/>
+            </Link>
             <Title>Login</Title>
             <Text>Don't have an account? Sign in <Link to="/users/create">Here</Link> </Text>
             <Form
@@ -85,7 +80,7 @@ export default LoginPage;
 
 const FormWrapper = styled.div`
     margin: 0 auto;
-    padding-top: 50px;
+    padding: 110px;
 `;
 
 const Title = styled.h2`

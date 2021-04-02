@@ -25,7 +25,9 @@ const Register = () => {
 
     return (
         <FormWrapper>
-            <Image src={logo} style={{marginLeft: '75px'}}/>
+            <Link to="/">
+                <Image preview={false} src={logo} style={{marginLeft: '150px', width: '50%'}}/>
+            </Link>
             <Title>Create an account</Title>
             <Text>Already have an account? Login <Link to="/users/login">Here</Link> </Text>
             <Form
@@ -98,7 +100,7 @@ export default Register;
 
 const FormWrapper = styled.div`
     margin: 0 auto;
-    padding-top: 50px;
+    padding: 110px;
 `;
 
 const Title = styled.h2`

@@ -43,7 +43,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/cart" component={Cart} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/users" component={UserDetails} />
           <PrivateRoute exact path="/users/me" component={Profile} />
           <Route exact path="/users/create" component={Register} />

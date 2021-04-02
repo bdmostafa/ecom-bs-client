@@ -37,7 +37,7 @@ export const userLogin = (userData) => async (dispatch) => {
 
             if(user.data) {
                 dispatch(loginSuccessAction(user.data));
-                message.success("Login Success");
+                message.success(`Login Success as ${user.data.role}`);
                 window.setTimeout(() => {
                     window.location.href = "/";
                 }, 500);

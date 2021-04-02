@@ -100,7 +100,10 @@ export const createUser = (userInfo) => async (dispatch) => {
 
         if (user.data) {
             dispatch(createUserAction(user.data));
-            message.success("You have been registered successfully.")
+            message.success("You have been registered successfully as an user.");
+            window.setTimeout(() => {
+                window.location.href = "/";
+            }, 500);
             return;
         }
 
