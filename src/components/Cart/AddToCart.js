@@ -9,6 +9,7 @@ const AddToCart = ({ product }) => {
     const dispatch = useDispatch();
     const cartItem = useSelector((state) => state.cart.cart);
     const [isInCart, setIsInCart] = useState(false);
+    const [disabled, setDisabled] = useState(true);
 
     const handleIncreaseQty = (e) => {
         dispatch(increaseQtyAction(product._id));
@@ -22,9 +23,13 @@ const AddToCart = ({ product }) => {
         // console.log(cartItem.findIndex((item) => item._id == product._id))
         if (cartItem.findIndex((item) => item._id == product._id) >= 0) {
             setIsInCart(true);
+            setDisabled(false);
         } 
 
-        else setIsInCart(false);
+        else {
+            setIsInCart(false);
+            setDisabled(true);
+        }
 
     }, [cartItem, product])
 
@@ -42,11 +47,11 @@ const AddToCart = ({ product }) => {
     return (
         <CartWrapper>
             <QtyBtn>
-                <Button onClick={handleDecreaseQty}>
+                <Button disabled={disabled} onClick={handleDecreaseQty}>
                     <MinusCircleFilled />
                 </Button>
-                <Qty>{product?.quantity ? product.quantity : 1 }</Qty>
-                <Button onClick={handleIncreaseQty}>
+                <Qty>{ product?.quantity }</Qty>
+                <Button disabled={disabled} onClick={handleIncreaseQty}>
                     <PlusCircleFilled />
                 </Button>
             </QtyBtn>

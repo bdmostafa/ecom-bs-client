@@ -37,7 +37,7 @@ const TopHeader = () => {
                 {
                     !user &&
                     <Menu.Item key="register">
-                        <LinkedMenu to="users/create" rel="noopener noreferrer">
+                        <LinkedMenu to="users/register" rel="noopener noreferrer">
                             Register
                         </LinkedMenu>
                     </Menu.Item>

@@ -1,27 +1,38 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { Form, Input, Button, Checkbox, Image } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from '../../Redux/User/UserActions';
 import logo from '../../assets/ebayLogo.png'
 
 const Register = () => {
+    const user = useSelector((state) => state.users?.user);
+
+    const history = useHistory();
+    let location = useLocation();
+
+    let { from } = location.state || { from: { pathname: "/" } };
     const dispatch = useDispatch();
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         const userData = {
             name: values.name,
             email: values.email,
             password: values.password,
             confirmPassword: values.confirmPassword,
         }
-        dispatch(createUser(userData))
+        await dispatch(createUser(userData))
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    if (user?.name) {
+        history.replace(from);
+        // window.location.reload();
+    }
 
     return (
         <FormWrapper>

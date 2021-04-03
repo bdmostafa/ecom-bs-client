@@ -35,9 +35,12 @@ const CartItem = ({ data }) => {
 						count={data.quantity}
 						{...{ handleIncreaseQty, handleDecreaseQty }}
 					/>
-					<span>
-						${(data.price * data.quantity).toFixed(2)}
-					</span>
+					<PriceSpan>
+						${(data.price).toFixed(2)} (Per Unit)
+					</PriceSpan>
+					<PriceSpan>
+						${(data.price * data.quantity).toFixed(2)} (Total)
+					</PriceSpan>
                     <DeleteOutlined onClick={handleClearCart} />
 				</CartItemLine>
 				<hr />
@@ -64,4 +67,9 @@ const CartItemLine = styled.div`
     align-items: center;
     justify-content: space-between;
     margin: 10px 0px;
+`;
+
+const PriceSpan = styled.span`
+	color: black;
+	margin: 10px;
 `;

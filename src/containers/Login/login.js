@@ -3,38 +3,45 @@ import styled from 'styled-components';
 import { Form, Input, Button, Checkbox, Image } from 'antd';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { userLogin } from '../../Redux/Login/LoginActions';
 import { fetchUser } from '../../Redux/User/UserActions';
 import logo from '../../assets/ebayLogo.png';
+import { withRouter } from 'react-router-dom';
 
 const LoginPage = () => {
-    const loggedInUser = useSelector((state) => state.login?.loggedInUser);
-    const [user, setUser] = useState({});
-
+    const user = useSelector((state) => state.users?.user);
     const history = useHistory();
-    const dispatch = useDispatch()
+    let location = useLocation();
 
-    const onFinish = (values) => {
+    let { from } = location.state || { from: { pathname: "/" } };
+    const dispatch = useDispatch();
+
+    const onFinish = async (values) => {
         console.log('Success:', values);
         const userData = {
             email: values.email,
             password: values.password
         }
-        dispatch(userLogin(userData));
+        await dispatch(userLogin(userData));
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
+    if (user?.name) {
+        history.replace(from);
+        // window.location.reload();
+    }
+console.log(location.state)
     return (
         <FormWrapper>
             <Link to="/">
                 <Image preview={false} src={logo} style={{marginLeft: '100px', width: '50%'}}/>
             </Link>
             <Title>Login</Title>
-            <Text>Don't have an account? Sign in <Link to="/users/create">Here</Link> </Text>
+            <Text>Don't have an account? Sign Up <Link to="/users/register">Here</Link> </Text>
             <Form
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
@@ -76,7 +83,7 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);
 
 const FormWrapper = styled.div`
     margin: 0 auto;

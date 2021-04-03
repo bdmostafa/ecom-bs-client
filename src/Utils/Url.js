@@ -41,7 +41,7 @@ const client = () => {
 			return axios.get(`${url}/products/${id}`);
 		},
         createProductNew: (productInfo) => {
-			return axios.post(`${url}/products/create`, productInfo);
+			return axios.post(`${url}/products/create`, productInfo, { withCredentials: true, credentials: 'include' });
 		},
         updateProduct: (id, productInfo) => {
 			return axios.patch(`${url}/products/update/${id}`, productInfo);
@@ -64,7 +64,7 @@ const client = () => {
 			return axios.get(`${url}/orders/pending-orders`);
 		},
         createOrder: (orderInfo) => {
-			return axios.post(`${url}/orders/create`, orderInfo);
+			return axios.post(`${url}/orders/create`, orderInfo, { withCredentials: true, credentials: 'include' });
 		},
         updateOrder: (id, orderInfo) => {
 			return axios.patch(`${url}/orders/update/${id}`, orderInfo);

@@ -126,8 +126,12 @@ export const createOrder = (orderInfo) => async (dispatch) => {
         const order = await url.createOrder(orderInfo);
 
         if (order.data) {
+            // console.log("orders=====", order.data)
             dispatch(createOrderAction(order.data));
             message.success("Order created successfully.");
+            window.setTimeout(() => {
+                window.location.href = "/products";
+            }, 500);
             return;
         }
 

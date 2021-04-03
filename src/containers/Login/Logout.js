@@ -6,6 +6,7 @@ import { useCookies, withCookies } from 'react-cookie'
 const Logout = () => {
     const dispatch = useDispatch();
     const [cookies, setCookie, removeCookie] = useCookies(["auth"]);
+    
     useEffect(() => {
 		dispatch(userLogout())
         removeCookie("auth");

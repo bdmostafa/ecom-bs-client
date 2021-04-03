@@ -28,18 +28,22 @@ const Counter = ({
 export default Counter;
 
 const CountWrapper = styled.div`
+    margin: 20px;
     display: flex;
     align-items: center;
     .value {
+        pointer-events: none;
+        height: 26px;
+        text-align: center;
         width: 35px;
-        border: 1px solid rgb(179 179 179 / 50%);
+        border: 1px solid rgb(179 179 179 / 100%);
         border-radius: 5px;
         color: rgba(0, 0, 0, 0.7);
+        margin: 5px;
     }
 `;
 
 const StyledButton = styled.button`
     font-weight: bold;
-    font-size: 20px;
-    margin-top: -5px;
+    width: 25px;
 `;

@@ -11,18 +11,17 @@ const ProductDetails = () => {
     const { productId } = useParams();
     const dispatch = useDispatch();
 
-    const [selectedProduct, setSelectedProduct] = useState({});
-
     useEffect(() => {
-        // const product = products?.filter(product => product._id === productId);
-
-        // if(product) setSelectedProduct({...product[0], quantity: 1});
         if (productId) dispatch(fetchProduct(productId))
-        
     }, [productId]);
 
+    let updatedProduct = {};
     const product = useSelector(state => state.products.product);
-console.log(product)
+    updatedProduct = {
+        ...product,
+        quantity: 1
+    }
+
     return (
         <>
             <HeaderInner />
@@ -32,7 +31,7 @@ console.log(product)
                 description={product?.description}
                 category={product?.category}
                 price={product?.price}
-                product={product}
+                product={updatedProduct}
             >
             </SingleProductDetails>
             <Footer />

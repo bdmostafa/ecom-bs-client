@@ -8,6 +8,9 @@ import NotFound from "../../components/NoFound";
 import { createOrder } from "../../Redux/Order/OrderActions";
 import HeaderInner from "../Header/HeaderInner";
 import styled from 'styled-components';
+import CartItems from "../../components/Cart/CartItems";
+import { withRouter } from 'react-router-dom';
+import { removeFromCartAction } from "../../Redux/Cart/CartActions";
 
 
 const Cart = () => {
@@ -30,38 +33,42 @@ const Cart = () => {
         cvc: "",
     };
 
-    const handleFormSubmit = (values) => {
+    const handleFormSubmit = async (values) => {
         let orderItems = cartItems.map((item) => ({
             product: item._id,
             quantity: item.quantity,
         }));
 
-        if (!user?.role === 'user') {
-            message.error("Please Login First");
-        } else if (values.name && values.street && values.email) {
-            dispatch(createOrder(orderItems))
+        if (user) {
+            await dispatch(createOrder(orderItems));
+            // for(let i = 0; i > orderItems.length; i++) {
+            //     dispatch(removeFromCartAction(orderItems[i]._id));
+            // } 
         } else {
-            message.error("Please Provide Shipping Information");
+            message.error("Please Login First");
+            history.push('/users/login');
         }
     };
+
+    // console.log(cartItems)
     return (
         <>
             <HeaderInner />
             {cartItems.length ? (
-                <Row gutter={[32, 32]} style={{ padding: '50px', display: 'flex', justifyContent: 'center' }}>
-                    <Col xs={24} sm={12} md={12} lg={16} xl={18} >
+                <Row gutter={[32, 32]} style={{ padding: '50px', display: 'flex', justifyContent: 'center', textAlign: '-webkit-center' }}>
+                    <Col xs={24} sm={24} md={24} lg={16} xl={18} >
                         <h2>Shopping Cart</h2>
 
                         {cartItems.map((cartItem) => (
                             <CartItem key={cartItem._id} data={cartItem} />
                         ))}
+                        {/* <CartItems data={cartItems} /> */}
 
                         <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                            <p>Subtotal: {" "}</p>
-                            <h3> {" "}${parseInt(subTotal).toFixed(2)}</h3>
+                            <h3>Subtotal: {" "}${parseInt(subTotal).toFixed(2)}</h3>
                         </div>
                     </Col>
-                    <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+                    <Col xs={24} sm={24} md={24} lg={8} xl={6}>
                         <PaymentWrapper>
                             <div style={{ background: 'gray', padding: '5px' }}>
                                 <Formik
@@ -170,14 +177,15 @@ const Cart = () => {
             ) : (
                 <NotFound
                     msg="Your Cart is Empty"
-                    BtnText="Add Items to Cart"
+                    BtnText="Go to product page"
+                    goBackLink="/products"
                 />
             )}
         </>
     );
 };
 
-export default Cart;
+export default withRouter(Cart);
 
 const PaymentWrapper = styled.div`
     padding: 10px;

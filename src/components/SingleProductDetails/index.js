@@ -5,7 +5,6 @@ import { StarFilled } from '@ant-design/icons';
 import AddToCart from '../Cart/AddToCart';
 
 const SingleProductDetails = (props) => {
-    console.log(props)
     return (
         <ProductDetailsWrapper>
 

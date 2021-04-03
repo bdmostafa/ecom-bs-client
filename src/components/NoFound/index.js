@@ -3,13 +3,13 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
-const NoFound = ({ msg, BtnText }) => {
+const NoFound = ({ msg, BtnText, goBackLink }) => {
     return (
         <NoFoundWrapper>
 			<TextBox>
 				<h2>{msg}</h2>
 				<Link
-					to="/"
+					to={goBackLink ? goBackLink : '/'}
 				>
 					<Button type="primary" >{BtnText ? BtnText : "Go to Home Page"}</Button>
 				</Link>
