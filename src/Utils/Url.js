@@ -60,6 +60,9 @@ const client = () => {
 		getOrder: (id) => {
 			return axios.get(`${url}/orders/${id}`);
 		},
+		getUserOrders: () => {
+			return axios.get(`${url}/orders/user/my-orders`, { withCredentials: true, credentials: 'include' });
+		},
 		getPendingOrders: () => {
 			return axios.get(`${url}/orders/pending-orders`);
 		},

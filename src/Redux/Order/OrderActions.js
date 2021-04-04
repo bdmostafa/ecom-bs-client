@@ -28,6 +28,13 @@ export const getAllOrdersAction = (orders) => {
     };
 };
 
+export const getUserOrdersAction = (orders) => {
+    return {
+        type: Types.GET_USER_ORDERS,
+        payload: orders
+    };
+};
+
 export const getOrderAction = (order) => {
     return {
         type: Types.GET_ORDER,
@@ -88,6 +95,21 @@ export const fetchOrder = (id) => async (dispatch) => {
         }
 
     } catch (error) {
+        return dispatch(orderFailureAction(error));
+    }
+}
+
+export const fetchUserOrders = () => async (dispatch) => {
+    dispatch(fetchOrderAction);
+    try {
+        const orders = await url.getUserOrders();
+
+        if (orders.data) {
+            return dispatch(getUserOrdersAction(orders.data));
+        }
+
+    } catch (error) {
+        console.log(error.message)
         return dispatch(orderFailureAction(error));
     }
 }

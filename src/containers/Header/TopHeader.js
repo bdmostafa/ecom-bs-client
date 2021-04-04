@@ -74,7 +74,7 @@ const TopHeader = () => {
                     {
                         user && 
                         <Menu.Item key="profile">
-                            <Link to="/users/me">
+                            <Link to="/dashboard/user/profile">
                                 <Avatar
                                     src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                                 />

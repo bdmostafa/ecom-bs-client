@@ -4,6 +4,7 @@ export const ORDER_SUCCESS = 'ORDER_SUCCESS';
 export const ORDER_FAILURE = 'PRODUCT_FAILURE';
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
 export const GET_ORDER = 'GET_ORDER';
+export const GET_USER_ORDERS = 'GET_USER_ORDERS';
 export const GET_PENDING_ORDERS = 'GET_PENDING_ORDERS';
 export const GET_ORDERS_BY_DATE = 'GET_ORDERS_BY_DATE';
 export const CREATE_ORDER = 'CREATE_ORDER';

@@ -34,6 +34,14 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
         orders: action.payload,
         err: ""
       };
+      
+    case Types.GET_USER_ORDERS:
+      return {
+        ...state,
+        loading: false,
+        userOrders: action.payload,
+        err: ""
+      };
 
     case Types.GET_ORDER:
       return {

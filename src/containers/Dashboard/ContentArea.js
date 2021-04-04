@@ -15,6 +15,7 @@ import DeleteUser from '../Users/DeleteUser';
 import { useSelector } from 'react-redux';
 import MyOrders from '../Users/MyOrders';
 import CreateUser from '../Users/CreateUser';
+import styled from 'styled-components';
 
 const ContentArea = () => {
   const path = useLocation().pathname;
@@ -23,7 +24,7 @@ const ContentArea = () => {
   return (
     <Layout className="site-layout">
       <Content style={{ margin: '0 16px' }}>
-
+      <Heading> Hi, <span>{user?.name}</span>! Welcome to {user?.role === 'user' ? 'your' : user?.role} Dashboard! </Heading>
         {
           user?.role === 'user'
             && (path === '/dashboard/user/profile' || path === '/dashboard/user')
@@ -83,3 +84,14 @@ const ContentArea = () => {
 };
 
 export default ContentArea;
+
+const Heading = styled.h2`
+font-size: large;
+text-align: center;
+margin: 30px;
+
+span {
+  font-style: italic;
+  color: cornflowerblue;
+}
+`;
