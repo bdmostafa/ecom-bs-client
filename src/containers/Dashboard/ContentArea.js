@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import AllOrders from '../Orders';
 import PendingOrders from '../Orders/PendingOrders';
 import OrderByDate from '../Orders/OrderByDate';
-import CreateProducts from '../Products/CreateProducts';
+import CreateProduct from '../Products/CreateProduct';
 import EditableProducts from '../Products/EditableProducts';
 import GenerateProducts from '../Products/GenerateProducts';
 import ProductsTable from '../Products/ProductsTable';
@@ -14,38 +14,38 @@ import Profile from '../Users/Profile';
 import DeleteUser from '../Users/DeleteUser';
 
 const ContentArea = () => {
-  const location = useLocation();
-  const [currentPath, setCurrentPath] = useState('');
+  const path = useLocation().pathname;
+  // const [currentPath, setCurrentPath] = useState('');
 
-  useEffect(() => {
-    setCurrentPath(location.pathname);
-  }, [location]);
+  // useEffect(() => {
+  //   setCurrentPath(location.pathname);
+  // }, [location]);
 
   return (
     <Layout className="site-layout">
       <Content style={{ margin: '0 16px' }}>
         {
-          currentPath === '/dashboard/all-products'
+          path === '/dashboard/all-products'
             ? <ProductsTable />
-            : currentPath === '/dashboard/edit-products'
+            : path === '/dashboard/edit-products'
               ? <EditableProducts />
-              : currentPath === '/dashboard/create-product'
-                ? <CreateProducts />
-                : currentPath === '/dashboard/generate-products'
+              : path === '/dashboard/create-product'
+                ? <CreateProduct />
+                : path === '/dashboard/generate-products'
                   ? <GenerateProducts />
-                  : currentPath === '/dashboard/all-orders'
+                  : path === '/dashboard/all-orders'
                     ? <AllOrders />
-                    : currentPath === '/dashboard/pending-orders'
+                    : path === '/dashboard/pending-orders'
                       ? <PendingOrders />
-                      : currentPath === '/dashboard/orders-by-date'
+                      : path === '/dashboard/orders-by-date'
                         ? <OrderByDate />
-                        : currentPath === '/dashboard/single-order'
+                        : path === '/dashboard/single-order'
                           ? <SingleOrder />
-                          : currentPath === '/dashboard/all-users'
+                          : path === '/dashboard/all-users'
                             ? <AllUsers />
-                            : currentPath === '/dashboard/loggedIn-users'
+                            : path === '/dashboard/loggedIn-users'
                               ? <Profile />
-                              : currentPath === '/dashboard/delete-users-by-id'
+                              : path === '/dashboard/delete-users-by-id'
                                 ? <DeleteUser />
                                 : <ProductsTable />
         }

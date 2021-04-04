@@ -86,10 +86,12 @@ export const fetchUser = () => async (dispatch) => {
         const user = await url.getUser();
 
         if (user.data) {
+            console.log(user.data)
             return dispatch(getUserAction(user.data));
         }
 
     } catch (error) {
+        console.log(error.message)
         return dispatch(userFailureAction(error));
     }
 }

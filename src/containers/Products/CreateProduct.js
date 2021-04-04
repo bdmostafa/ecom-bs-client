@@ -5,7 +5,8 @@ import Form from 'antd/lib/form/Form';
 import { Button, Input } from 'antd';
 import { createNewProduct } from '../../Redux/Product/ProductActions';
 
-const CreateProducts = () => {
+const CreateProduct = () => {
+    console.log("ok")
     const dispatch = useDispatch()
 
     const onFinish = (values) => {
@@ -109,7 +110,7 @@ const CreateProducts = () => {
     );
 };
 
-export default CreateProducts;
+export default CreateProduct;
 
 const FormWrapper = styled.div`
     margin: 0 auto;

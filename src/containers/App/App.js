@@ -24,6 +24,7 @@ import { fetchUser } from '../../Redux/User/UserActions';
 import PrivateRoute from '../Login/PrivateRoute';
 import Logout from '../Login/Logout';
 import Cart from '../Cart';
+import CreateProduct from '../Products/CreateProduct';
 
 function App() {
   const dispatch = useDispatch();
@@ -43,11 +44,14 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/cart" component={Cart} />
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/users" component={UserDetails} />
-          <PrivateRoute exact path="/users/me" component={Profile} />
-          <PrivateRoute exact path="/dashboard/orders" component={Orders} />
-          <PrivateRoute exact path="/dashboard/generate-products" component={Products} />
+          <PrivateRoute path="/dashboard">
+              <Dashboard />
+          </PrivateRoute>
+          {/* <PrivateRoute exact path="/users" component={UserDetails} />
+          <PrivateRoute exact path="/users/me" component={Profile} /> */}
+          {/* <PrivateRoute exact path="/dashboard/orders" component={Orders} />
+          <PrivateRoute exact path="/dashboard/generate-products" component={Products} /> */}
+          {/* <PrivateRoute exact path="/dashboard/create-product" component={CreateProduct} /> */}
           <Route exact path="/users/register" component={Register} />
           <Route exact path="/users/login" component={Login} />
           <Route exact path="/users/logout" component={Logout} />

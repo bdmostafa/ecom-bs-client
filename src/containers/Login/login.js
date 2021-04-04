@@ -34,7 +34,7 @@ const LoginPage = () => {
         history.replace(from);
         // window.location.reload();
     }
-console.log(location.state)
+// console.log(location.state)
     return (
         <FormWrapper>
             <Link to="/">
