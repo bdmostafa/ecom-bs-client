@@ -12,42 +12,69 @@ import SingleOrder from '../Orders/SingleOrder';
 import AllUsers from '../Users/AllUsers';
 import Profile from '../Users/Profile';
 import DeleteUser from '../Users/DeleteUser';
+import { useSelector } from 'react-redux';
+import MyOrders from '../Users/MyOrders';
+import CreateUser from '../Users/CreateUser';
 
 const ContentArea = () => {
   const path = useLocation().pathname;
-  // const [currentPath, setCurrentPath] = useState('');
-
-  // useEffect(() => {
-  //   setCurrentPath(location.pathname);
-  // }, [location]);
+  const user = useSelector(state => state.users.user);
 
   return (
     <Layout className="site-layout">
       <Content style={{ margin: '0 16px' }}>
+
         {
-          path === '/dashboard/all-products'
+          user?.role === 'user'
+            && (path === '/dashboard/user/profile' || path === '/dashboard/user')
+            ? <Profile />
+            : path === '/dashboard/user/my-orders'
+              ? <MyOrders />
+              : <ProductsTable />
+        }
+
+        {
+          user?.role === 'admin'
+            && (path === '/dashboard/all-products' || path === 'dashboard/admin')
             ? <ProductsTable />
-            : path === '/dashboard/edit-products'
+            : path === '/dashboard/admin/create-product'
+              ? <CreateProduct />
+              : path === '/dashboard/admin/pending-orders'
+                ? <PendingOrders />
+                : path === 'dashboard/admin/single-order'
+                  ? <SingleOrder />
+                  : path === '/dashboard/admin/all-users'
+                    ? <AllUsers />
+                    : path === '/dashboard/admin/create-user'
+                      ? <CreateUser />
+                      : <div></div>
+        }
+
+        {
+          user?.role === 'superAdmin'
+            && (path === '/dashboard/all-products' || path === '/dashboard/super-admin')
+            ? <ProductsTable />
+            : path === '/dashboard/super-admin/edit-products'
               ? <EditableProducts />
-              : path === '/dashboard/create-product'
+              : path === '/dashboard/super-admin/create-product'
                 ? <CreateProduct />
-                : path === '/dashboard/generate-products'
+                : path === '/dashboard/super-admin/generate-products'
                   ? <GenerateProducts />
-                  : path === '/dashboard/all-orders'
+                  : path === '/dashboard/super-admin/all-orders'
                     ? <AllOrders />
-                    : path === '/dashboard/pending-orders'
+                    : path === '/dashboard/super-admin/pending-orders'
                       ? <PendingOrders />
-                      : path === '/dashboard/orders-by-date'
+                      : path === '/dashboard/super-admin/orders-by-date'
                         ? <OrderByDate />
-                        : path === '/dashboard/single-order'
+                        : path === '/dashboard/super-admin/single-order'
                           ? <SingleOrder />
-                          : path === '/dashboard/all-users'
+                          : path === '/dashboard/super-admin/all-users'
                             ? <AllUsers />
-                            : path === '/dashboard/loggedIn-users'
-                              ? <Profile />
-                              : path === '/dashboard/delete-users-by-id'
+                            : path === '/dashboard/super-admin/create-admin'
+                              ? <CreateUser />
+                              : path === '/dashboard/super-admin/delete-users-by-id'
                                 ? <DeleteUser />
-                                : <ProductsTable />
+                                : <div></div>
         }
       </Content>
       <Footer style={{ textAlign: 'center', padding: '0px 0px 20px 0px' }}>Ecom-bs ©2021 Developed by <a href="https://mdmostafa.com" target="_blank">Mostafa</a> </Footer>

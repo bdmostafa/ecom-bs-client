@@ -57,7 +57,7 @@ export const userLogout = () => async (dispatch) => {
 
     try {
         const user = await url.userLogout();
-
+// console.log(user.data)
         if(user.data) {
             dispatch(userLogoutAction(user.data));
             message.success("Logout Success");
@@ -68,6 +68,7 @@ export const userLogout = () => async (dispatch) => {
         }
         
     } catch (err) {
+        // console.log(err.message)
         dispatch(loginFailureAction(err.message));
         message.error(err.message);
         return;

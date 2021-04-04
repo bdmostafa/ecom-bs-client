@@ -10,7 +10,7 @@ const Logout = () => {
     useEffect(() => {
 		dispatch(userLogout())
         removeCookie("auth");
-		window.location.href = "/";
+		// window.location.href = "/";
 	}, []);
 
     return (

@@ -44,8 +44,8 @@ const ProductsTable = () => {
 
     const data = products;
 
-    function onChange(pagination, filters, sorter, extra) {
-    }
+    function onChange(pagination, filters, sorter, extra) {}
+    
     return (
         <Table columns={columns} dataSource={data} onChange={onChange} />
     );
