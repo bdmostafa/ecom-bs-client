@@ -165,6 +165,7 @@ export const createOrder = (orderInfo) => async (dispatch) => {
 
 export const updateOrder = (id, orderInfo) => async (dispatch) => {
     dispatch(fetchOrderAction);
+
     try {
         const order = await url.updateOrder(id, orderInfo);
 
@@ -173,6 +174,7 @@ export const updateOrder = (id, orderInfo) => async (dispatch) => {
         }
 
     } catch (error) {
+        // console.log(error.message)
         return dispatch(orderFailureAction(error));
     }
 }

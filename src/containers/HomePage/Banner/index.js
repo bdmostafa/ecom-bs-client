@@ -12,14 +12,14 @@ const Banner = () => {
     return (
         <BannerWrapper className="banner">
             <div>
+                <Image preview={false} style={contentStyle} src={banner1}/>
+            </div>
+            {/* <div>
                 <Image style={contentStyle} src={banner1}/>
             </div>
             <div>
                 <Image style={contentStyle} src={banner1}/>
-            </div>
-            <div>
-                <Image style={contentStyle} src={banner1}/>
-            </div>
+            </div> */}
         </BannerWrapper>
     );
 };

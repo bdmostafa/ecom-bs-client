@@ -10,14 +10,14 @@ const CreateProduct = () => {
     const dispatch = useDispatch()
 
     const onFinish = (values) => {
-        const productData = {
-            title: values.title,
-            price: values.price,
-            description: values.description,
-            category: values.category,
-            image: values.image,
-        }
-        dispatch(createNewProduct(productData))
+        // const productData = {
+        //     title: values.title,
+        //     price: values.price,
+        //     description: values.description,
+        //     category: values.category,
+        //     image: values.image,
+        // }
+        // dispatch(createNewProduct(productData))
     };
 
     const onFinishFailed = (errorInfo) => {

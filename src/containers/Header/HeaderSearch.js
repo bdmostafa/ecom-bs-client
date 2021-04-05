@@ -38,6 +38,7 @@ const HeaderSearch = () => {
             <Col span={2}>
                 <Link to="/">
                     <Image
+                    preview={false}
                         width={100}
                         src={logo}
                     />
