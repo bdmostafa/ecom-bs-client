@@ -10,7 +10,7 @@ const client = () => {
 			return axios.get(`${url}/users`, { withCredentials: true });
 		},
 		createUser: (userInfo) => {
-			return axios.post(`${url}/users/create`, userInfo);
+			return axios.post(`${url}/users/create`, userInfo, { withCredentials: true });
 		},
         getUser: () => {
 			return axios.get(`${url}/users/me`, { withCredentials: true });

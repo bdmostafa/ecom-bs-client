@@ -27,19 +27,15 @@ const CreateProduct = () => {
         <FormWrapper>
             <Title>Create Product</Title>
             <Form
+                name="basic"
+                initialValues={{ remember: true }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
             >
-
                 <Form.Item
-                    label="Product Title"
+                    label="Title"
                     name="title"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input product title!',
-                        },
-                    ]}
+                    rules={[{ required: true, message: 'Product title is required!' }]}
                 >
                     <Input />
                 </Form.Item>
@@ -47,16 +43,7 @@ const CreateProduct = () => {
                 <Form.Item
                     label="Price"
                     name="price"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input product price!',
-                        },
-                        {
-                            type: 'number',
-                            min: 0,
-                        }
-                    ]}
+                    rules={[{ required: true, message: 'Product price is required!' }]}
                 >
                     <Input />
                 </Form.Item>
@@ -64,12 +51,7 @@ const CreateProduct = () => {
                 <Form.Item
                     label="Description"
                     name="description"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input product description!',
-                        },
-                    ]}
+                    rules={[{ required: true, message: 'Product description is required!' }]}
                 >
                     <Input />
                 </Form.Item>
@@ -77,12 +59,7 @@ const CreateProduct = () => {
                 <Form.Item
                     label="Category"
                     name="category"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input product category!',
-                        },
-                    ]}
+                    rules={[{ required: true, message: 'Product category is required!' }]}
                 >
                     <Input />
                 </Form.Item>
@@ -90,12 +67,7 @@ const CreateProduct = () => {
                 <Form.Item
                     label="Image"
                     name="image"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input product image url!',
-                        },
-                    ]}
+                    rules={[{ required: true, message: 'Product image is required!' }]}
                 >
                     <Input />
                 </Form.Item>
@@ -103,7 +75,7 @@ const CreateProduct = () => {
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
                         Create Product
-                    </Button>
+        </Button>
                 </Form.Item>
             </Form>
         </FormWrapper>

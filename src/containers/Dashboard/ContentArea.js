@@ -24,19 +24,25 @@ const ContentArea = () => {
   return (
     <Layout className="site-layout">
       <Content style={{ margin: '0 16px' }}>
-      <Heading> Hi, <span>{user?.name}</span>! Welcome to {user?.role === 'user' ? 'your' : user?.role} Dashboard! </Heading>
+        <Heading> Hi, <span>{user?.name}</span>! Welcome to {user?.role === 'user' ? 'your' : user?.role} Dashboard! </Heading>
+        {
+          user?.role 
+          && path === '/dashboard/all-products' 
+          && <ProductsTable />
+        }
+
         {
           user?.role === 'user'
-            && (path === '/dashboard/user/profile' || path === '/dashboard/user')
+            && ((path === '/dashboard/user/profile' || path === '/dashboard/user')
             ? <Profile />
             : path === '/dashboard/user/my-orders'
               ? <MyOrders />
-              : <ProductsTable />
+              : <div></div>)
         }
 
         {
           user?.role === 'admin'
-            && (path === '/dashboard/all-products' || path === 'dashboard/admin')
+            && (path === '/dashboard/all-products'
             ? <ProductsTable />
             : path === '/dashboard/admin/create-product'
               ? <CreateProduct />
@@ -48,12 +54,12 @@ const ContentArea = () => {
                     ? <AllUsers />
                     : path === '/dashboard/admin/create-user'
                       ? <CreateUser />
-                      : <div></div>
+                      : <ProductsTable />)
         }
 
         {
           user?.role === 'superAdmin'
-            && (path === '/dashboard/all-products' || path === '/dashboard/super-admin')
+            && ((path === '/dashboard/all-products' || path === '/dashboard/super-admin')
             ? <ProductsTable />
             : path === '/dashboard/super-admin/edit-products'
               ? <EditableProducts />
@@ -75,7 +81,7 @@ const ContentArea = () => {
                               ? <CreateUser />
                               : path === '/dashboard/super-admin/delete-users-by-id'
                                 ? <DeleteUser />
-                                : <div></div>
+                                : <div></div>)
         }
       </Content>
       <Footer style={{ textAlign: 'center', padding: '0px 0px 20px 0px' }}>Ecom-bs ©2021 Developed by <a href="https://mdmostafa.com" target="_blank">Mostafa</a> </Footer>

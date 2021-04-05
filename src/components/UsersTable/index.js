@@ -175,10 +175,10 @@ const UsersTable = ({ users }) => {
         // },
         {
             title: "Action",
-            dataIndex: "delete",
-            render: (_, record) => {
-                return <Button onClick={() => handleDelete(record)}>Delete</Button>;
-            },
+            // dataIndex: "delete",
+            // render: (_, record) => {
+            //     return <Button onClick={() => handleDelete(record)}>Delete</Button>;
+            // },
         },
     ];
     const mergedColumns = columns.map((col) => {
