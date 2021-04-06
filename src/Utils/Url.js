@@ -1,60 +1,60 @@
-  
+
 import axios from 'axios';
 
 const url = 'http://localhost:5000'
 
 const client = () => {
 	return {
-        // User Urls
+		// User Urls
 		getUsers: () => {
 			return axios.get(`${url}/users`, { withCredentials: true });
 		},
 		createUser: (userInfo) => {
 			return axios.post(`${url}/users/create`, userInfo, { withCredentials: true });
 		},
-        getUser: () => {
+		getUser: () => {
 			return axios.get(`${url}/users/me`, { withCredentials: true });
 		},
-        updateUser: (userInfo) => {
+		updateUser: (userInfo) => {
 			return axios.patch(`${url}/users/update/me`, userInfo, { withCredentials: true });
 		},
-        deleteUser: (id) => {
+		deleteUser: (id) => {
 			return axios.delete(`${url}/users/delete/me`, id, { withCredentials: true });
 		},
-        deleteUsers: (id) => {
+		deleteUsers: (id) => {
 			return axios.delete(`${url}/users/delete`, id, { withCredentials: true });
 		},
 
-        // Login Urls
-        userLogin: (userInfo) => {
-			return axios.post(`${url}/users/login`, userInfo, {withCredentials: true, credentials: 'include'});
+		// Login Urls
+		userLogin: (userInfo) => {
+			return axios.post(`${url}/users/login`, userInfo, { withCredentials: true, credentials: 'include' });
 		},
-        userLogout: () => {
+		userLogout: () => {
 			return axios.post(`${url}/users/logout`, { withCredentials: true, credentials: 'include' });
 		},
 
-        // Product Urls
-        getAllProducts: () => {
+		// Product Urls
+		getAllProducts: () => {
 			return axios.get(`${url}/products`, { withCredentials: true, credentials: 'include' });
 		},
 		getProduct: (id) => {
 			return axios.get(`${url}/products/${id}`, { withCredentials: true, credentials: 'include' });
 		},
-        createProductNew: (productInfo) => {
+		createProductNew: (productInfo) => {
 			return axios.post(`${url}/products/create`, productInfo, { withCredentials: true, credentials: 'include' });
 		},
-        updateProduct: (id, productInfo) => {
+		updateProduct: (id, productInfo) => {
 			return axios.patch(`${url}/products/update/${id}`, productInfo, { withCredentials: true, credentials: 'include' });
 		},
-        deleteProduct: (id) => {
+		deleteProduct: (id) => {
 			return axios.delete(`${url}/products/delete/${id}`, { withCredentials: true, credentials: 'include' });
 		},
-        generateProducts: () => {
+		generateProducts: () => {
 			return axios.get(`${url}/products/generate-products`, { withCredentials: true, credentials: 'include' });
 		},
 
-         // Order Urls
-         getAllOrders: () => {
+		// Order Urls
+		getAllOrders: () => {
 			return axios.get(`${url}/orders`, { withCredentials: true, credentials: 'include' });
 		},
 		getOrder: (id) => {
@@ -66,16 +66,16 @@ const client = () => {
 		getPendingOrders: () => {
 			return axios.get(`${url}/orders/pending-orders`, { withCredentials: true, credentials: 'include' });
 		},
-        createOrder: (orderInfo) => {
+		createOrder: (orderInfo) => {
 			return axios.post(`${url}/orders/create`, orderInfo, { withCredentials: true, credentials: 'include' });
 		},
-        updateOrder: (id, orderInfo) => {
+		updateOrder: (id, orderInfo) => {
 			return axios.patch(`${url}/orders/update/${id}`, orderInfo, { withCredentials: true, credentials: 'include' });
 		},
-        deleteOrder: (id) => {
+		deleteOrder: (id) => {
 			return axios.delete(`${url}/orders/delete/${id}`, { withCredentials: true, credentials: 'include' });
 		},
-        getOrdersByDate: (date) => {
+		getOrdersByDate: (date) => {
 			return axios.get(`${url}/orders/orders-by-date`, date, { withCredentials: true, credentials: 'include' });
 		},
 

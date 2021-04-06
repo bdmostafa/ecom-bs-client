@@ -82,6 +82,7 @@ const EditableProducts = () => {
           const item = newData[index];
           newData.splice(index, 1, { ...item, ...row });
           setData(newData);
+          console.log(item._id, row)
           dispatch(updateProduct(item._id, row))
           setEditingKey('');
         } else {

@@ -15,8 +15,7 @@ const PendingOrders = () => {
         getPendingOrders();
       }, [getPendingOrders]);
 
-    
-    console.log(pendingOrders);
+    // console.log(pendingOrders);
     return (
         <div>
             <PendingOrdersTable pendingOrders={pendingOrders}/>

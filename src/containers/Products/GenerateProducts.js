@@ -9,8 +9,9 @@ const GenerateProducts = () => {
     const dispatch = useDispatch();
 
     const handleGenerateProducts = () => {
-        dispatch(generateProducts())
+        dispatch(generateProducts());
     };
+
     return (
         <Wrapper>
             <h2>Generate products from third party API</h2>

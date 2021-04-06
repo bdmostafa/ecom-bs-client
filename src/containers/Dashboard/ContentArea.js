@@ -1,6 +1,6 @@
 import Layout, { Content, Footer, Header } from 'antd/lib/layout/layout';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import AllOrders from '../Orders';
 import PendingOrders from '../Orders/PendingOrders';
 import OrderByDate from '../Orders/OrderByDate';
@@ -21,13 +21,31 @@ const ContentArea = () => {
   const path = useLocation().pathname;
   const user = useSelector(state => state.users.user);
 
+  const history = useHistory();
+
+  useEffect(() => {
+      // if (user?.role === 'admin') {
+      //     if (path.startsWith('dashboard', 1)) {
+      //         history.push('/dashboard/admin')
+      //     }
+      // }
+      (user?.role === 'admin' && path === '/dashboard')
+          ? history.replace('/dashboard/admin')
+          : (user?.role === 'superAdmin' && path === '/dashboard')
+              ? history.replace('/dashboard/superAdmin')
+              : (user?.role === 'user' && path === '/dashboard')
+                  ? history.replace('/dashboard/user')
+                  : history.replace('/');
+
+  }, [user?.role]);
+
   return (
     <Layout className="site-layout">
       <Content style={{ margin: '0 16px' }}>
         <Heading> Hi, <span>{user?.name}</span>! Welcome to {user?.role === 'user' ? 'your' : user?.role} Dashboard! </Heading>
         {
           user?.role 
-          && path === '/dashboard/all-products' 
+          && (path === '/dashboard/all-products' || path === '/dashboard/admin' || path === '/dashboard/super-admin')
           && <ProductsTable />
         }
 
@@ -42,9 +60,7 @@ const ContentArea = () => {
 
         {
           user?.role === 'admin'
-            && (path === '/dashboard/all-products'
-            ? <ProductsTable />
-            : path === '/dashboard/admin/create-product'
+            && (path === '/dashboard/admin/create-product'
               ? <CreateProduct />
               : path === '/dashboard/admin/pending-orders'
                 ? <PendingOrders />
@@ -53,33 +69,31 @@ const ContentArea = () => {
                   : path === '/dashboard/admin/all-users'
                     ? <AllUsers />
                     : path === '/dashboard/admin/create-user'
-                      ? <CreateUser />
-                      : <ProductsTable />)
+                      ? <CreateUser role={user?.role} />
+                      : <div></div>)
         }
 
         {
           user?.role === 'superAdmin'
-            && ((path === '/dashboard/all-products' || path === '/dashboard/super-admin')
-            ? <ProductsTable />
-            : path === '/dashboard/super-admin/edit-products'
+            && (path === '/dashboard/superAdmin/edit-products'
               ? <EditableProducts />
-              : path === '/dashboard/super-admin/create-product'
+              : path === '/dashboard/superAdmin/create-product'
                 ? <CreateProduct />
-                : path === '/dashboard/super-admin/generate-products'
+                : path === '/dashboard/superAdmin/generate-products'
                   ? <GenerateProducts />
-                  : path === '/dashboard/super-admin/all-orders'
+                  : path === '/dashboard/superAdmin/all-orders'
                     ? <AllOrders />
-                    : path === '/dashboard/super-admin/pending-orders'
+                    : path === '/dashboard/superAdmin/pending-orders'
                       ? <PendingOrders />
-                      : path === '/dashboard/super-admin/orders-by-date'
+                      : path === '/dashboard/superAdmin/orders-by-date'
                         ? <OrderByDate />
-                        : path === '/dashboard/super-admin/single-order'
+                        : path === '/dashboard/superAdmin/single-order'
                           ? <SingleOrder />
-                          : path === '/dashboard/super-admin/all-users'
+                          : path === '/dashboard/superAdmin/all-users'
                             ? <AllUsers />
-                            : path === '/dashboard/super-admin/create-admin'
-                              ? <CreateUser />
-                              : path === '/dashboard/super-admin/delete-users-by-id'
+                            : path === '/dashboard/superAdmin/create-admin'
+                              ? <CreateUser role={user?.role} />
+                              : path === '/dashboard/superAdmin/delete-users-by-id'
                                 ? <DeleteUser />
                                 : <div></div>)
         }

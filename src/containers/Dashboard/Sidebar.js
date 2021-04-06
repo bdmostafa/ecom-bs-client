@@ -20,33 +20,32 @@ const Sidebar = () => {
     const path = useLocation().pathname;
     const user = useSelector(state => state.users.user);
 
-    const history = useHistory();
+    // const history = useHistory();
 
-    useEffect(() => {
-        if (user?.role === 'admin') {
-            if (path.startsWith('dashboard', 1)) {
-                history.replace('/dashboard/admin')
-            }
-        }
-        if (user?.role === 'user') {
-            if (path.startsWith('dashboard', 1)) {
-                history.replace('/dashboard/user')
-            }
-        }
-        if (user?.role === 'superAdmin') {
-            if (path.startsWith('dashboard', 1)) {
-                history.replace('/dashboard/super-admin')
-            }
-        }
-    }, [user?.role]);
+    // useEffect(() => {
+    //     // if (user?.role === 'admin') {
+    //     //     if (path.startsWith('dashboard', 1)) {
+    //     //         history.push('/dashboard/admin')
+    //     //     }
+    //     // }
+    //     (user?.role === 'admin' && path === '/dashboard')
+    //         ? history.replace('/dashboard/admin')
+    //         : (user?.role === 'superAdmin' && path === '/dashboard')
+    //             ? history.replace('/dashboard/superAdmin')
+    //             : (user?.role === 'user' && path === '/dashboard')
+    //                 ? history.replace('/dashboard/user')
+    //                 : history.replace('/');
 
+    // }, [user?.role]);
+
+    // console.log(user?.role)
     const [collapsed, setCollapsed] = useState(false)
 
     const onCollapse = (collapsed) => {
         console.log(collapsed);
         setCollapsed(true)
     };
- 
+
     return (
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} style={{ minHeight: '100vh' }}>
             <div className="logo" />
@@ -59,13 +58,10 @@ const Sidebar = () => {
                         <>
                             <SubMenu key="sub1" icon={<ShoppingOutlined />} title="Products">
                                 {
-                                    user?.role === 'superAdmin' &&
+                                    (user?.role === 'admin' || user?.role === 'superAdmin') &&
                                     <>
-                                        <Menu.Item key="3">
-                                            <Link to={`/dashboard/${user?.role}/edit-products`}>Edit Products</Link>
-                                        </Menu.Item>
-                                        <Menu.Item key="5">
-                                            <Link to={`/dashboard/${user?.role}/generate-products`}>Generate Products</Link>
+                                        <Menu.Item key="2">
+                                            <Link to="/dashboard/all-products">All Products</Link>
                                         </Menu.Item>
                                         <Menu.Item key="4">
                                             <Link to={`/dashboard/${user?.role}/create-product`}>Create A Product</Link>
@@ -74,13 +70,13 @@ const Sidebar = () => {
                                 }
 
                                 {
-                                    (user?.role === 'admin' || user?.role === 'superAdmin') &&
+                                    user?.role === 'superAdmin' &&
                                     <>
-                                        <Menu.Item key="2">
-                                            <Link to="/dashboard/all-products">All Products</Link>
+                                        <Menu.Item key="3">
+                                            <Link to={`/dashboard/${user?.role}/edit-products`}>Edit Products</Link>
                                         </Menu.Item>
-                                        <Menu.Item key="4">
-                                            <Link to={`/dashboard/${user?.role}/create-product`}>Create A Product</Link>
+                                        <Menu.Item key="5">
+                                            <Link to={`/dashboard/${user?.role}/generate-products`}>Generate Products</Link>
                                         </Menu.Item>
                                     </>
                                 }
@@ -113,17 +109,18 @@ const Sidebar = () => {
                             </SubMenu>
 
                             <SubMenu key="sub3" icon={<UserOutlined />} title="Users">
+                                {
+                                    user?.role === 'admin' &&
+                                    <Menu.Item key="14">
+                                        <Link to={`/dashboard/${user?.role}/create-user`}>Create User</Link>
+                                    </Menu.Item>
+                                }
 
                                 {
                                     (user?.role === 'admin' || user?.role === 'superAdmin') &&
-                                    <>
-                                        <Menu.Item key="10">
-                                            <Link to={`/dashboard/${user?.role}/all-users`}>All Users</Link>
-                                        </Menu.Item>
-                                        <Menu.Item key="14">
-                                            <Link to={`/dashboard/${user?.role}/create-user`}>Create User</Link>
-                                        </Menu.Item>
-                                    </>
+                                    <Menu.Item key="10">
+                                        <Link to={`/dashboard/${user?.role}/all-users`}>All Users</Link>
+                                    </Menu.Item>
                                 }
 
                                 {

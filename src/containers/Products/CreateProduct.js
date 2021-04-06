@@ -1,23 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from "react-redux";
-import Form from 'antd/lib/form/Form';
-import { Button, Input } from 'antd';
+import { Button, Input, Form } from 'antd';
 import { createNewProduct } from '../../Redux/Product/ProductActions';
 
 const CreateProduct = () => {
-    console.log("ok")
     const dispatch = useDispatch()
 
     const onFinish = (values) => {
-        // const productData = {
-        //     title: values.title,
-        //     price: values.price,
-        //     description: values.description,
-        //     category: values.category,
-        //     image: values.image,
-        // }
-        // dispatch(createNewProduct(productData))
+        const productData = {
+            title: values.title,
+            price: values.price,
+            description: values.description,
+            category: values.category,
+            image: values.image,
+        }
+        dispatch(createNewProduct(productData))
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -73,7 +71,7 @@ const CreateProduct = () => {
                 </Form.Item>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" style={{ width: '100%'}}>
                         Create Product
         </Button>
                 </Form.Item>
@@ -87,12 +85,17 @@ export default CreateProduct;
 const FormWrapper = styled.div`
     margin: 0 auto;
     padding-top: 50px;
+    max-width: max-content;
+    border: 1px solid gray;
+    padding: 30px;
+    border-radius: 5px;
 `;
 
 const Title = styled.h2`
     color: black;
     text-align: center;
     font-size: 18px;
+    margin-bottom: 20px;
 `;
 
 const Text = styled.p`

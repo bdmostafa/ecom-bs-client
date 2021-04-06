@@ -22,8 +22,8 @@ const HeaderSearch = () => {
 
     const menu = (
         <Menu>
-            {categoriesName.map(cat => (
-                <Menu.Item>
+            {categoriesName.map((cat, idx) => (
+                <Menu.Item key={idx}>
                     <Link to={{ pathname: `/products/category/${cat}`, param: cat }}>
                         {cat}
                     </Link>

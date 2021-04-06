@@ -1,5 +1,6 @@
 import * as Types from './ProductTypes';
 import url from '../../Utils/Url';
+import { message } from 'antd';
 
 export const fetchProductAction = () => {
     return {
@@ -97,7 +98,12 @@ export const createNewProduct = (productInfo) => async (dispatch) => {
         const product = await url.createProductNew(productInfo);
 
         if (product.data) {
-            return dispatch(createProductAction(product.data));
+            dispatch(createProductAction(product.data));
+            message.success("Product created successfully!");
+            window.setTimeout(() => {
+                window.location.href = "/dashboard";
+            }, 500);
+            return;
         }
 
     } catch (error) {
@@ -107,9 +113,10 @@ export const createNewProduct = (productInfo) => async (dispatch) => {
 
 export const updateProduct = (id, productInfo) => async (dispatch) => {
     dispatch(fetchProductAction);
+    console.log(id, productInfo)
     try {
         const product = await url.updateProduct(id, productInfo);
-
+console.log(product.data)
         if (product.data) {
             return dispatch(updateProductAction(product.data));
         }
@@ -125,7 +132,12 @@ export const deleteProduct = (id) => async (dispatch) => {
         const product = await url.deleteProduct(id);
 
         if (product.data) {
-            return dispatch(deleteProductAction(product.data));
+            dispatch(deleteProductAction(product.data));
+            message.success("Product deleted successfully!");
+            window.setTimeout(() => {
+                window.location.href = "/dashboard";
+            }, 500);
+            return;
         }
 
     } catch (error) {
@@ -139,7 +151,13 @@ export const generateProducts = () => async (dispatch) => {
         const products = await url.generateProducts();
 
         if (products.data) {
-            return dispatch(generateProductsAction(products.data));
+            dispatch(generateProductsAction(products.data));
+            message.success("10 Products generated from third party API successfully!");
+            window.setTimeout(() => {
+                // window.location.href = "/dashboard/all-products";
+                window.history.back();
+            }, 500);
+            return;
         }
 
     } catch (error) {
