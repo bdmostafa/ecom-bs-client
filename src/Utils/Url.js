@@ -16,7 +16,7 @@ const client = () => {
 			return axios.get(`${url}/users/me`, { withCredentials: true });
 		},
 		updateUser: (userInfo) => {
-			return axios.patch(`${url}/users/update/me`, userInfo, { withCredentials: true });
+			return axios.put(`${url}/users/update/me`, userInfo, { withCredentials: true });
 		},
 		deleteUser: (id) => {
 			return axios.delete(`${url}/users/delete/me`, id, { withCredentials: true });
@@ -44,7 +44,7 @@ const client = () => {
 			return axios.post(`${url}/products/create`, productInfo, { withCredentials: true, credentials: 'include' });
 		},
 		updateProduct: (id, productInfo) => {
-			return axios.patch(`${url}/products/update/${id}`, productInfo, { withCredentials: true, credentials: 'include' });
+			return axios.put(`${url}/products/update/${id}`, productInfo, { withCredentials: true, credentials: 'include' });
 		},
 		deleteProduct: (id) => {
 			return axios.delete(`${url}/products/delete/${id}`, { withCredentials: true, credentials: 'include' });
@@ -70,7 +70,7 @@ const client = () => {
 			return axios.post(`${url}/orders/create`, orderInfo, { withCredentials: true, credentials: 'include' });
 		},
 		updateOrder: (id, orderInfo) => {
-			return axios.patch(`${url}/orders/update/${id}`, orderInfo, { withCredentials: true, credentials: 'include' });
+			return axios.put(`${url}/orders/update/${id}`, orderInfo, { withCredentials: true, credentials: 'include' });
 		},
 		deleteOrder: (id) => {
 			return axios.delete(`${url}/orders/delete/${id}`, { withCredentials: true, credentials: 'include' });

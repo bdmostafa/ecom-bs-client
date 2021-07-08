@@ -113,10 +113,8 @@ export const createNewProduct = (productInfo) => async (dispatch) => {
 
 export const updateProduct = (id, productInfo) => async (dispatch) => {
     dispatch(fetchProductAction);
-    console.log(id, productInfo)
     try {
         const product = await url.updateProduct(id, productInfo);
-console.log(product.data)
         if (product.data) {
             return dispatch(updateProductAction(product.data));
         }
