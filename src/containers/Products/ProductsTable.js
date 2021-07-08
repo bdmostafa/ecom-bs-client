@@ -47,7 +47,12 @@ const ProductsTable = () => {
     function onChange(pagination, filters, sorter, extra) {}
     
     return (
-        <Table columns={columns} dataSource={data} onChange={onChange} />
+        <Table 
+            columns={columns} 
+            dataSource={data} 
+            onChange={onChange} 
+            pagination={{ pageSize: 5 }}
+        />
     );
 };
 

@@ -186,6 +186,7 @@ const EditableProducts = () => {
           rowClassName="editable-row"
           pagination={{
             onChange: cancel,
+            pageSize: 5
           }}
         />
       </Form>

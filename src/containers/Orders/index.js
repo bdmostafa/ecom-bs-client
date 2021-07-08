@@ -19,7 +19,7 @@ const AllOrders = () => {
 
     return (
         <div>
-            <OrdersTable />
+            <OrdersTable orders={orders} />
         </div>
     );
 };

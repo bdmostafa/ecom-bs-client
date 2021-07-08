@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PendingOrdersTable from '../../components/OrdersTable/PendingOrdersTable';
+import OrdersTable from '../../components/OrdersTable';
 import { fetchPendingOrders } from '../../Redux/Order/OrderActions';
 
 const PendingOrders = () => {
@@ -18,7 +18,7 @@ const PendingOrders = () => {
     // console.log(pendingOrders);
     return (
         <div>
-            <PendingOrdersTable pendingOrders={pendingOrders}/>
+            <OrdersTable orders={pendingOrders}/>
         </div>
     );
 };

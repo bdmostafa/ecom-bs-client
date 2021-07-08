@@ -170,11 +170,12 @@ export const updateOrder = (id, orderInfo) => async (dispatch) => {
         const order = await url.updateOrder(id, orderInfo);
 
         if (order.data) {
+            message.success("Order updated successfully.");
             return dispatch(updateOrderAction(order.data));
         }
 
     } catch (error) {
-        // console.log(error.message)
+        message.error(error.message);
         return dispatch(orderFailureAction(error));
     }
 }
