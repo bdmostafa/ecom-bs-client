@@ -91,10 +91,12 @@ export const fetchOrder = (id) => async (dispatch) => {
         const order = await url.getOrder(id);
 
         if (order.data) {
+            message.success(`Order- ${id} has been loaded successfully.`)
             return dispatch(getOrderAction(order.data));
         }
 
     } catch (error) {
+        message.error(error.message)
         return dispatch(orderFailureAction(error));
     }
 }
