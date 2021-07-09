@@ -75,8 +75,8 @@ const client = () => {
 		deleteOrder: (id) => {
 			return axios.delete(`${url}/orders/delete/${id}`, { withCredentials: true, credentials: 'include' });
 		},
-		getOrdersByDate: (date) => {
-			return axios.get(`${url}/orders/orders-by-date`, date, { withCredentials: true, credentials: 'include' });
+		getOrdersByDate: (dateInfo) => {
+			return axios.get(`${url}/orders/orders-by-date`, dateInfo, { withCredentials: true, credentials: 'include' });
 		},
 
 	};

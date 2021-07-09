@@ -128,16 +128,18 @@ export const fetchPendingOrders = () => async (dispatch) => {
     }
 }
 
-export const fetchOrdersByDate = (date) => async (dispatch) => {
+export const fetchOrdersByDate = (dateInfo) => async (dispatch) => {
     dispatch(fetchOrderAction);
     try {
-        const orders = await url.getOrdersByDate(date);
+        const orders = await url.getOrdersByDate(dateInfo);
 
         if (orders.data) {
+            message.success(`Orders of ${dateInfo.date} are loaded successfully`)
             return dispatch(getOrdersByDateAction(orders.data));
         }
 
     } catch (error) {
+        message.error(error.message)
         return dispatch(orderFailureAction(error));
     }
 }
