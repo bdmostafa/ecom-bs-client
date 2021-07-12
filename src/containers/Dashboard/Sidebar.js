@@ -126,9 +126,9 @@ const Sidebar = () => {
                                 {
                                     user?.role === 'superAdmin' &&
                                     <>
-                                        <Menu.Item key="12">
+                                        {/* <Menu.Item key="12">
                                             <Link to={`/dashboard/${user?.role}/delete-users-by-id`}>Delete Users</Link>
-                                        </Menu.Item>
+                                        </Menu.Item> */}
 
                                         <Menu.Item key="15">
                                             <Link to={`/dashboard/${user?.role}/create-admin`}>Create Admin</Link>

@@ -93,8 +93,8 @@ const ContentArea = () => {
                             ? <AllUsers />
                             : path === '/dashboard/superAdmin/create-admin'
                               ? <CreateUser role={user?.role} />
-                              : path === '/dashboard/superAdmin/delete-users-by-id'
-                                ? <DeleteUser />
+                              // : path === '/dashboard/superAdmin/delete-users-by-id'
+                              //   ? <DeleteUser />
                                 : <div></div>)
         }
       </Content>

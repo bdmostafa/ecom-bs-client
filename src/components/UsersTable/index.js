@@ -1,72 +1,20 @@
 import {
     Button,
     Form,
-    Input,
-    InputNumber,
     Popconfirm,
-    Select,
     Table,
     Typography,
 } from "antd";
-import { Option } from "antd/lib/mentions";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { deleteUser, updateUser } from "../../Redux/User/UserActions";
-
-const EditableCell = ({
-    editing,
-    dataIndex,
-    title,
-    inputType,
-    record,
-    index,
-    children,
-    ...restProps
-}) => {
-    const inputNode =
-        inputType === "number"
-            ? (<InputNumber />)
-            : inputType === "select"
-                ? (
-                    <Select>
-                        <Option value="user">User</Option>
-                        <Option value="admin">Admin</Option>
-                        <Option value="super">SuperAdmin</Option>
-                    </Select>
-                )
-                : (
-                    <Input />
-                );
-
-    return (
-        <td {...restProps}>
-            {editing ? (
-                <Form.Item
-                    name={dataIndex}
-                    style={{
-                        margin: 0,
-                    }}
-                    rules={[
-                        {
-                            required: true,
-                            message: `Please Input ${title}!`,
-                        },
-                    ]}
-                >
-                    {inputNode}
-                </Form.Item>
-            ) : (
-                children
-            )}
-        </td>
-    );
-};
+import { EditableCell } from "../OrdersTable/EditableCell";
 
 const UsersTable = ({ users }) => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const [role, setRole] = useState("");
-    let data = users;
+    const [data, setData] = useState(users)
+    
     const [editingKey, setEditingKey] = useState("");
 
     const isEditing = (record) => record._id === editingKey;
@@ -97,23 +45,24 @@ const UsersTable = ({ users }) => {
             const newData = [...data];
             const index = newData.findIndex((item) => key === item._id);
             
+            // TODO -> Need fixing in backend code for update user functionality
             if (index > -1) {
-                // const item = newData[index];
-                // newData.splice(index, 1, { ...item, ...row });
-                // dispatch(updateUser(newData));
-                // setEditingKey('');
+                const item = newData[index];
+                newData.splice(index, 1, { ...item, ...row });
+
                 const editingCell = newData[index];
-            const editedData = {
-                ...editingCell,
-                name: row.name,
-                email: row.email,
-                role: row.role,
-            };
-            setEditingKey("");
-            dispatch(updateUser(editedData));
+                const editedData = {
+                    ...editingCell,
+                    name: row.name,
+                    email: row.email,
+                    role: row.role,
+                };
+                setData(newData);
+                setEditingKey("");
+                dispatch(updateUser(editedData));
             } else {
                 newData.push(row);
-                // setData(newData);
+                setData(newData);
                 dispatch(updateUser(newData));
                 setEditingKey('');
             }
@@ -128,57 +77,57 @@ const UsersTable = ({ users }) => {
             dataIndex: "name",
             key: "name",
             width: "25%",
-            // editable: true,
+            editable: true,
         },
         {
             title: "Email",
             dataIndex: "email",
-            width: "15%",
+            width: "30%",
             key: "email",
-            // editable: true,
+            editable: true,
         },
         {
             title: "Role",
             dataIndex: "role",
-            width: "15%",
+            width: "20%",
             key: "role",
-            // editable: true,
+            editable: true,
         },
-        // {
-        //     title: "operation",
-        //     dataIndex: "operation",
-        //     render: (_, record) => {
-        //         const editable = isEditing(record);
-        //         return editable ? (
-        //             <span>
-        //                 <a
-        //                     onClick={() => save(record._id)}
-        //                     style={{
-        //                         marginRight: 8,
-        //                     }}
-        //                 >
-        //                     Save
-        //                 </a>
-        //                 <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-        //                     <a>Cancel</a>
-        //                 </Popconfirm>
-        //             </span>
-        //         ) : (
-        //             <Typography.Link
-        //                 disabled={editingKey !== ""}
-        //                 onClick={() => edit(record)}
-        //             >
-        //                 Edit
-        //             </Typography.Link>
-        //         );
-        //     },
-        // },
+        {
+            title: "Update",
+            dataIndex: "operation",
+            render: (_, record) => {
+                const editable = isEditing(record);
+                return editable ? (
+                    <span>
+                        <a
+                            onClick={() => save(record._id)}
+                            style={{
+                                marginRight: 8,
+                            }}
+                        >
+                            Save
+                        </a>
+                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+                            <a>Cancel</a>
+                        </Popconfirm>
+                    </span>
+                ) : (
+                    <Typography.Link
+                        disabled={editingKey !== ""}
+                        onClick={() => edit(record)}
+                    >
+                        Edit
+                    </Typography.Link>
+                );
+            },
+        },
         {
             title: "Action",
-            // dataIndex: "delete",
-            // render: (_, record) => {
-            //     return <Button onClick={() => handleDelete(record)}>Delete</Button>;
-            // },
+            dataIndex: "delete",
+            render: (_, record) => {
+                return <Button onClick={() => handleDelete(record)}>Delete</Button>;
+            },
         },
     ];
     const mergedColumns = columns.map((col) => {

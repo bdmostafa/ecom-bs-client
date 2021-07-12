@@ -17,7 +17,7 @@ const OrdersTable = ({ orders }) => {
   
   const [editingKey, setEditingKey] = useState("");
 
-  const isEditing = (record) => record._id === editingKey;
+  const isEditing = (record) => record?._id === editingKey;
 
   const edit = (record) => {
       form.setFieldsValue({
